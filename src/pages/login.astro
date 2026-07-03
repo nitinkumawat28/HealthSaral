@@ -1,0 +1,202 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Sign In — HealthSaral" description="Log in to your HealthSaral account securely using an email OTP.">
+  <!-- Main container styled with a calm, minimal background (#F3F6F4) and primary text color (#16262A) -->
+  <main class="min-h-screen flex items-center justify-center bg-[#F3F6F4] text-[#16262A] px-4">
+    <div class="w-full max-w-md bg-white rounded-xl shadow-sm border border-[#DDE4E0] p-8 md:p-10">
+      
+      <!-- Logo Branding Header -->
+      <div class="flex flex-col items-center mb-8">
+        <a href="/" class="flex items-center gap-2 mb-3">
+          <!-- Branded Custom SVG Medical-Leaf Logo -->
+          <svg class="w-8 h-8 text-[#0F5C4C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" fill="rgba(15, 92, 76, 0.05)" stroke-width="1.5"/>
+            <path d="M12 4.5C12 4.5 7 9 7 13.5C7 18 12 19.5 12 19.5M12 4.5C12 4.5 17 9 17 13.5C17 18 12 19.5 12 19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7.5 13.5H9.5L11 9L13 17L14.5 13.5H16.5" stroke="#D65B3E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="font-display text-2xl font-bold tracking-tight">
+            HealthSaral<span class="text-[#D65B3E] ml-0.5 font-sans leading-none">&bull;</span>
+          </span>
+        </a>
+        <h1 class="text-xl font-display font-semibold mt-2">Sign In</h1>
+        <p class="text-sm text-gray-500 text-center mt-1">Enter your email to receive a secure login code</p>
+      </div>
+
+      <!-- Notification Alerts (for errors or success steps) -->
+      <div id="error-msg" class="hidden mb-5 p-3.5 bg-red-50 border border-red-200 text-red-700 text-xs rounded-lg font-medium leading-relaxed"></div>
+      <div id="success-msg" class="hidden mb-5 p-3.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs rounded-lg font-medium leading-relaxed"></div>
+
+      <!-- Step 1: Email Input Form -->
+      <form id="email-form" class="space-y-5">
+        <div>
+          <label for="email-input" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+            Email Address
+          </label>
+          <input
+            type="email"
+            id="email-input"
+            required
+            placeholder="name@example.com"
+            class="w-full px-4 py-3 bg-[#F3F6F4] border border-[#DDE4E0] rounded-lg text-sm text-[#16262A] placeholder-gray-400 focus:outline-none focus:border-[#D65B3E] focus:ring-2 focus:ring-[#D65B3E]/10 transition-all"
+          />
+        </div>
+
+        <button
+          type="submit"
+          id="send-otp-btn"
+          class="w-full py-3 px-4 bg-[#D65B3E] hover:bg-[#c04f33] active:scale-[0.98] text-white font-semibold text-sm rounded-lg shadow-sm transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D65B3E]"
+        >
+          Send Login Code
+        </button>
+      </form>
+
+      <!-- Step 2: OTP Code Verification Form (hidden by default) -->
+      <form id="otp-form" class="hidden space-y-5">
+        <div>
+          <label for="otp-input" class="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">
+            Verification Code (6-digit)
+          </label>
+          <input
+            type="text"
+            id="otp-input"
+            required
+            pattern="[0-9]{6}"
+            inputmode="numeric"
+            maxlength="6"
+            placeholder="123456"
+            class="w-full px-4 py-3 bg-[#F3F6F4] border border-[#DDE4E0] rounded-lg text-center tracking-[0.75em] font-mono text-lg font-bold text-[#16262A] placeholder-gray-300 focus:outline-none focus:border-[#D65B3E] focus:ring-2 focus:ring-[#D65B3E]/10 transition-all"
+          />
+        </div>
+
+        <button
+          type="submit"
+          id="verify-otp-btn"
+          class="w-full py-3 px-4 bg-[#D65B3E] hover:bg-[#c04f33] active:scale-[0.98] text-white font-semibold text-sm rounded-lg shadow-sm transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D65B3E]"
+        >
+          Verify &amp; Sign In
+        </button>
+
+        <button
+          type="button"
+          id="back-btn"
+          class="w-full py-2 text-center text-xs font-medium text-gray-500 hover:text-[#16262A] transition-colors focus:outline-none cursor-pointer"
+        >
+          &larr; Use a different email
+        </button>
+      </form>
+
+    </div>
+  </main>
+</Layout>
+
+<!-- Client-side script handling Supabase communication and UI toggle states -->
+<script>
+  import { supabase } from '../lib/supabase.js';
+
+  // Grab required elements from the page DOM
+  const emailForm = document.getElementById('email-form');
+  const otpForm = document.getElementById('otp-form');
+  const emailInput = document.getElementById('email-input') as HTMLInputElement;
+  const otpInput = document.getElementById('otp-input') as HTMLInputElement;
+  
+  const errorMsg = document.getElementById('error-msg');
+  const successMsg = document.getElementById('success-msg');
+  
+  const sendOtpBtn = document.getElementById('send-otp-btn') as HTMLButtonElement;
+  const verifyOtpBtn = document.getElementById('verify-otp-btn') as HTMLButtonElement;
+  const backBtn = document.getElementById('back-btn');
+
+  let currentEmail = '';
+
+  // Step A: Handle submission of email to trigger OTP code
+  emailForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    // Reset UI alerts
+    errorMsg?.classList.add('hidden');
+    if (errorMsg) errorMsg.textContent = '';
+    
+    // Set loading indicator state
+    sendOtpBtn.disabled = true;
+    sendOtpBtn.textContent = 'Sending code...';
+
+    // Call Supabase OTP authentication API
+    const { error } = await supabase.auth.signInWithOtp({
+      email,
+      options: {
+        emailRedirectTo: window.location.origin + '/dashboard',
+      }
+    });
+
+    if (error) {
+      // Display error message if the API call failed
+      if (errorMsg) {
+        errorMsg.textContent = error.message;
+        errorMsg.classList.remove('hidden');
+      }
+      sendOtpBtn.disabled = false;
+      sendOtpBtn.textContent = 'Send Login Code';
+    } else {
+      // Cache email and proceed to Verification Step
+      currentEmail = email;
+      emailForm.classList.add('hidden');
+      otpForm?.classList.remove('hidden');
+      
+      if (successMsg) {
+        successMsg.textContent = `A 6-digit login code has been sent to ${email}.`;
+        successMsg.classList.remove('hidden');
+      }
+    }
+  });
+
+  // Step B: Verify the 6-digit OTP code entered by the user
+  otpForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const token = otpInput.value.trim();
+    if (!token) return;
+
+    // Reset UI alerts
+    errorMsg?.classList.add('hidden');
+    successMsg?.classList.add('hidden');
+    
+    // Set loading state
+    verifyOtpBtn.disabled = true;
+    verifyOtpBtn.textContent = 'Verifying...';
+
+    // Call Supabase OTP verify token API
+    const { error } = await supabase.auth.verifyOtp({
+      email: currentEmail,
+      token,
+      type: 'email'
+    });
+
+    if (error) {
+      // Display verification failure error
+      if (errorMsg) {
+        errorMsg.textContent = error.message;
+        errorMsg.classList.remove('hidden');
+      }
+      verifyOtpBtn.disabled = false;
+      verifyOtpBtn.textContent = 'Verify & Sign In';
+    } else {
+      // Success! Redirect to the authenticated dashboard
+      window.location.href = '/dashboard';
+    }
+  });
+
+  // Action: Enable going back to edit/correct the email address
+  backBtn?.addEventListener('click', () => {
+    otpForm?.classList.add('hidden');
+    emailForm?.classList.remove('hidden');
+    successMsg?.classList.add('hidden');
+    errorMsg?.classList.add('hidden');
+    
+    sendOtpBtn.disabled = false;
+    sendOtpBtn.textContent = 'Send Login Code';
+    if (otpInput) otpInput.value = '';
+  });
+</script>

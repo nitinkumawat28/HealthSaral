@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Dashboard — HealthSaral" description="Your patient dashboard. View your medical reports in plain, actionable language.">
+  <!-- Initially hidden container to prevent flashing content while checking authorization -->
+  <main id="dashboard-content" class="hidden min-h-screen bg-[#F3F6F4] text-[#16262A] flex flex-col">
+    
+    <!-- Top Dashboard Header -->
+    <header class="w-full bg-white border-b border-[#DDE4E0] py-4 px-6 md:px-8">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        
+        <!-- Logo Branding -->
+        <div class="flex items-center gap-2">
+          <!-- Custom SVG Medical-Leaf Logo -->
+          <svg class="w-6 h-6 text-[#0F5C4C]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" fill="rgba(15, 92, 76, 0.05)" stroke-width="1.5"/>
+            <path d="M12 4.5C12 4.5 7 9 7 13.5C7 18 12 19.5 12 19.5M12 4.5C12 4.5 17 9 17 13.5C17 18 12 19.5 12 19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M7.5 13.5H9.5L11 9L13 17L14.5 13.5H16.5" stroke="#D65B3E" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="font-display text-lg font-bold tracking-tight">
+            HealthSaral
+          </span>
+        </div>
+
+        <!-- User profile section and Logout Button -->
+        <div class="flex items-center gap-4">
+          <span id="user-email" class="hidden sm:inline text-xs font-mono bg-gray-100 border border-gray-200 text-gray-600 rounded px-2.5 py-1"></span>
+          <button
+            id="logout-btn"
+            class="px-4 py-2 bg-white hover:bg-gray-50 border border-[#DDE4E0] active:scale-[0.98] font-semibold text-xs rounded-lg transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#D65B3E]/20"
+          >
+            Logout
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Dashboard Area -->
+    <div class="flex-grow max-w-4xl mx-auto w-full py-12 px-6">
+      <div class="bg-white border border-[#DDE4E0] rounded-xl p-8 md:p-10 shadow-sm text-center">
+        <h2 class="text-2xl font-display font-bold mb-3">Welcome to HealthSaral</h2>
+        <p class="text-sm text-gray-500 max-w-md mx-auto mb-6">
+          Your account is successfully authenticated. This is a protected dashboard area where you will soon be able to view and manage your uploaded blood reports.
+        </p>
+        
+        <!-- Quick Info Card -->
+        <div class="bg-[#F3F6F4]/50 border border-[#DDE4E0] rounded-lg p-5 text-left text-xs space-y-2">
+          <p class="font-semibold text-gray-700 uppercase tracking-wider">Account Details</p>
+          <div class="grid grid-cols-3 gap-2">
+            <span class="text-gray-400">Authenticated via:</span>
+            <span class="col-span-2 font-medium">Email One-Time Password (OTP)</span>
+            <span class="text-gray-400">Email Address:</span>
+            <span id="user-email-body" class="col-span-2 font-mono font-medium"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  import { supabase } from '../lib/supabase.js';
+
+  // Client-side authentication check
+  async function checkAuthentication() {
+    // Check if a session already exists in local storage / Supabase SDK cache
+    const { data: { session }, error } = await supabase.auth.getSession();
+
+    if (error || !session) {
+      // If there is no authenticated session, redirect to the login page immediately
+      window.location.href = '/login';
+    } else {
+      // If a session exists, populate the UI text fields with the user's email
+      const emailHeader = document.getElementById('user-email');
+      const emailBody = document.getElementById('user-email-body');
+      
+      if (emailHeader) emailHeader.textContent = session.user.email ?? '';
+      if (emailBody) emailBody.textContent = session.user.email ?? '';
+
+      // Unhide the dashboard container once authentication is verified
+      const dashboardContainer = document.getElementById('dashboard-content');
+      if (dashboardContainer) {
+        dashboardContainer.classList.remove('hidden');
+      }
+    }
+  }
+
+  // Handle user logout action
+  const logoutBtn = document.getElementById('logout-btn');
+  logoutBtn?.addEventListener('click', async () => {
+    // Call Supabase API to terminate session
+    const { error } = await supabase.auth.signOut();
+    
+    // Redirect back to the login screen
+    window.location.href = '/login';
+  });
+
+  // Run the authentication check when the script loads on the client
+  checkAuthentication();
+</script>
