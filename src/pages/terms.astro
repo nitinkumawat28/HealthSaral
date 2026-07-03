@@ -1,0 +1,94 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Terms of Service & Clinical Disclaimer | HealthSaral"
+  description="HealthSaral Terms of Service. Learn about platform usage rules, medical disclaimers, and subscription terms for our AI lab report check software."
+>
+  <Header />
+
+  <main class="flex-grow">
+    <!-- Header banner -->
+    <section class="relative overflow-hidden bg-mesh-gradient pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-hairline">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-flex items-center justify-center gap-1.5 px-3 py-1 bg-primary/5 border border-primary/10 text-primary text-[10px] sm:text-[11px] font-mono rounded-full uppercase tracking-wider mb-6">
+          Usage rules & limits
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary tracking-tight mb-4 text-balance">
+          Terms of Service
+        </h1>
+        <p class="text-sm sm:text-base text-muted max-w-xl mx-auto">
+          Last Updated: July 3, 2026. Please read these terms carefully before uploading files or subscribing to HealthSaral.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16 bg-canvas px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto prose dark:prose-invert text-ink text-sm sm:text-base leading-relaxed space-y-8 font-sans">
+        
+        <!-- Safety Alert Box -->
+        <div class="border border-amber-200 bg-amber-50/40 dark:border-amber-900/30 dark:bg-amber-950/20 rounded-xl p-6 flex gap-4 items-start shadow-sm my-8">
+          <div class="shrink-0 mt-0.5 text-amber-600 dark:text-amber-400">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+            </svg>
+          </div>
+          <div>
+            <h4 class="text-sm font-sans font-semibold text-amber-900 dark:text-amber-200 mb-1">MANDATORY CLINICAL SAFETY DISCLAIMER</h4>
+            <p class="text-xs text-amber-900/80 dark:text-amber-300/80 leading-relaxed">
+              HealthSaral is strictly an educational tool. The AI analysis, reports, and nutrition guides provided are designed for general wellness guidance and to facilitate informed discussions with your physician. They are <strong>not</strong> medical diagnoses, descriptions, treatments, or prescriptions. Always consult a certified healthcare professional before making dietary changes or altering medication.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">1. Acceptable Platform Use</h2>
+          <p>
+            By accessing or using HealthSaral, you agree to comply with all applicable local, national, and international laws. You agree that:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>You will only upload laboratory reports belonging to you or for which you have explicit, documented consent to upload.</li>
+            <li>You will not upload malicious files, scripts, or content intended to disrupt platform operations.</li>
+            <li>You will not scrape, copy, or reverse-engineer the parsing logic or dashboard designs.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">2. Medical Consultation Policy</h2>
+          <p>
+            HealthSaral parses quantitative medical values (like Red Blood Cells, HbA1c, or TSH) and lists standard reference metrics. Under no circumstances does the platform replace a medical doctor's diagnosis. You understand that:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Subclinical values or flags indicate a need to discuss the metrics with a physician, not to diagnose yourself.</li>
+            <li>Reference intervals can vary between laboratory networks due to testing techniques. Always rely on the printed values of the performing lab for definitive diagnosis.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">3. Subscriptions & Payments</h2>
+          <p>
+            HealthSaral offers a free scan for your first laboratory report. Additional scans require purchasing a subscription:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Pricing:</strong> Subscriptions are billed annually at the stated price (currently ₹499/year). Prices include all relevant local taxes.</li>
+            <li><strong>Auto-Renewal:</strong> Subscriptions renew automatically unless cancelled in your account settings prior to the billing date.</li>
+            <li><strong>Refunds:</strong> Since we offer a free tier to test parsing capabilities, refunds are evaluated on a case-by-case basis under our helpdesk guidelines.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">4. Limitation of Liability</h2>
+          <p>
+            HealthSaral is provided on an "as is" and "as available" basis. To the maximum extent permitted by law, HealthSaral Inc. and its clinical advisors shall not be liable for any direct, indirect, incidental, or consequential damages resulting from your reliance on report parsing guides or educational content.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

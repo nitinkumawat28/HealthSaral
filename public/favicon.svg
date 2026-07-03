@@ -1,0 +1,45 @@
+<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    /* Default: Light Mode */
+    .circle-bg {
+      stroke: #0F5C4C;
+      stroke-opacity: 0.15;
+      stroke-width: 1.5;
+      fill: #0F5C4C;
+      fill-opacity: 0.04;
+    }
+    .droplet-path {
+      stroke: #0F5C4C;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+    .heartbeat-path {
+      stroke: #FF6B5B;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none;
+    }
+
+    /* Dark Mode Overrides */
+    @media (prefers-color-scheme: dark) {
+      .circle-bg {
+        stroke: #5BC2AF;
+        stroke-opacity: 0.25;
+        fill: #5BC2AF;
+        fill-opacity: 0.08;
+      }
+      .droplet-path {
+        stroke: #5BC2AF;
+      }
+      .heartbeat-path {
+        stroke: #FF6B5B;
+      }
+    }
+  </style>
+  <path class="circle-bg" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" />
+  <path class="droplet-path" d="M12 4.5C12 4.5 7 9 7 13.5C7 18 12 19.5 12 19.5M12 4.5C12 4.5 7 9 7 13.5C7 18 12 19.5 12 19.5" />
+  <path class="heartbeat-path" d="M7.5 13.5H9.5L11 9L13 17L14.5 13.5H16.5" />
+</svg>

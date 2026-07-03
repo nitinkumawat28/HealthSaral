@@ -1,0 +1,112 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Privacy Policy & HIPAA Data Compliance | HealthSaral"
+  description="HealthSaral's Privacy Policy. Read about how we secure your blood test reports with 256-bit encryption, HIPAA compliance standards, and our strict zero-sell data policy."
+>
+  <Header />
+
+  <main class="flex-grow">
+    <!-- Header banner -->
+    <section class="relative overflow-hidden bg-mesh-gradient pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-hairline">
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="inline-flex items-center justify-center gap-1.5 px-3 py-1 bg-primary/5 border border-primary/10 text-primary text-[10px] sm:text-[11px] font-mono rounded-full uppercase tracking-wider mb-6">
+          Security & compliance Standards
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary tracking-tight mb-4 text-balance">
+          Privacy Policy
+        </h1>
+        <p class="text-sm sm:text-base text-muted max-w-xl mx-auto">
+          Last Updated: July 3, 2026. Your health data belongs to you. We secure it with industry-leading encryption and strict privacy practices.
+        </p>
+      </div>
+    </section>
+
+    <!-- Content Section -->
+    <section class="py-16 bg-canvas px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto prose dark:prose-invert text-ink text-sm sm:text-base leading-relaxed space-y-8 font-sans">
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">1. Our Commitment to Your Privacy</h2>
+          <p>
+            At HealthSaral, we understand that medical and lab test records are highly sensitive personal information. We are committed to maintaining the highest level of security, confidentiality, and integrity for all data you upload or submit to our platform. We strictly enforce a <strong>zero-selling data policy</strong>: your personal details, email address, and clinical measurements will never be sold, leased, or shared with advertisers, pharmaceutical companies, or third-party brokers.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">2. Information We Collect</h2>
+          <p>
+            When you use our services, we collect information that you directly provide to us:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li><strong>Account Information:</strong> If you sign up, we collect your name, email address, and authentication credentials.</li>
+            <li><strong>Laboratory Reports:</strong> PDF files, JPEG/PNG images, or camera scans of laboratory results (e.g., blood tests, urine checkups, lipid profiles) that you upload for parsing.</li>
+            <li><strong>User Inputs:</strong> Optional demographic data (such as age, gender assigned at birth) that helps refine biomarker reference range calculations.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">3. How We Process and Use Your Data</h2>
+          <p>
+            We process laboratory records solely to provide clinical translation services:
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Extracting text and identifying biomarker names, values, units, and reference intervals.</li>
+            <li>Comparing extracted results to standard clinical benchmarks to classify values (e.g., high, low, or within normal ranges).</li>
+            <li>Providing educational explanations and localized nutritional recommendations (Indian diet cards).</li>
+          </ul>
+          <p>
+            Data processing runs inside a secure, sandboxed environment. We do not use your medical reports to train foundational AI models without anonymization.
+          </p>
+        </div>
+
+        <!-- Callout box for security -->
+        <div class="border border-hairline bg-canvas-soft rounded-xl p-6 shadow-sm-stacked my-8">
+          <h3 class="font-display font-bold text-primary text-base sm:text-lg mb-2">Technical Security Protections</h3>
+          <ul class="space-y-2 text-xs sm:text-sm text-muted" role="list">
+            <li class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              <span><strong>End-to-End Encryption:</strong> All uploads and data transfers use Secure Socket Layer (SSL/TLS 1.3) protocol.</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              <span><strong>Encryption at Rest:</strong> Saved laboratory databases are encrypted with AES-256 standards.</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+              <span><strong>Compliance:</strong> Operations are structured to satisfy HIPAA (Health Insurance Portability and Accountability Act) guidelines.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">4. Data Storage and Deletion</h2>
+          <p>
+            Free-tier report scans are processed and stored temporarily to facilitate report outline generation. These files are scheduled for automatic deletion from our servers within 30 days. Paid-tier members can choose to save their medical report history for ongoing biomarker tracking.
+          </p>
+          <p>
+            You have the right to request deletion of your account and all associated lab reports at any time by accessing your settings or emailing support@healthsaral.com.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">5. Changes to This Policy</h2>
+          <p>
+            We may update our privacy policy to reflect changes in compliance requirements or security enhancements. We will notify registered users via email about any significant policy updates.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

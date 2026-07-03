@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #F7FAF9; /* Soft off-white background */
+  --color-primary: #0F5C4C;    /* Deep teal primary */
+  --color-accent: #FF6B5B;     /* Warm coral for CTA buttons only */
+  --color-ink: #1A1D1B;        /* Near-black text */
+  --color-muted: #6B7280;      /* Gray for deemphasized text */
+  --color-hairline: rgba(15, 92, 76, 0.08); /* Faint teal hairline border */
+  
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  /* Stacked shadow presets for premium Vercel-like depth */
+  --shadow-sm-stacked: 0px 1px 1px rgba(0, 0, 0, 0.02), 0px 2px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md-stacked: 0px 2px 2px rgba(0, 0, 0, 0.04), 0px 8px 8px -8px rgba(0, 0, 0, 0.04);
+  --shadow-lg-stacked: 0px 4px 6px rgba(0, 0, 0, 0.03), 0px 10px 15px -3px rgba(0, 0, 0, 0.04), 0px 20px 25px -5px rgba(0, 0, 0, 0.02);
+}
+
+/* Custom Utilities using @utility */
+@utility bg-mesh-gradient {
+  background: radial-gradient(circle at 50% -20%, rgba(15, 92, 76, 0.12) 0%, rgba(255, 107, 91, 0.04) 50%, rgba(247, 250, 249, 0) 100%);
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* Base element styles */
+html,
+body {
+  background-color: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* Headings default styles */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+}
+
+/* Dark Mode variables override */
+.dark {
+  --color-canvas: #0B1210;       /* Very deep dark green/black canvas */
+  --color-canvas-soft: #050908;  /* Even deeper canvas-soft background */
+  --color-primary: #5BC2AF;     /* Bright soft teal in dark mode */
+  --color-ink: #ECF7F5;         /* Soft warm off-white for body text */
+  --color-muted: #8CA39E;       /* Muted grey-teal for supporting text */
+  --color-hairline: rgba(91, 194, 175, 0.12); /* Bright soft teal hairline border */
+}
+
+/* Scoped Dark Mode custom adjustments */
+.dark .bg-mesh-gradient {
+  background: radial-gradient(circle at 50% -20%, rgba(91, 194, 175, 0.15) 0%, rgba(255, 107, 91, 0.05) 50%, rgba(5, 9, 8, 0) 100%);
+}
+
+/* Ensure shadows are softer/darker in dark mode */
+.dark {
+  --shadow-sm-stacked: 0px 1px 1px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md-stacked: 0px 2px 2px rgba(0, 0, 0, 0.4), 0px 8px 8px -8px rgba(0, 0, 0, 0.4);
+  --shadow-lg-stacked: 0px 4px 6px rgba(0, 0, 0, 0.3), 0px 10px 15px -3px rgba(0, 0, 0, 0.4), 0px 20px 25px -5px rgba(0, 0, 0, 0.2);
+}

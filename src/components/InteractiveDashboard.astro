@@ -1,0 +1,371 @@
+---
+// InteractiveDashboard.astro - High-fidelity clinical dashboard mockup with interactive tabs for HealthSaral
+---
+
+<div class="w-full max-w-4xl mx-auto bg-canvas border border-hairline rounded-lg shadow-lg-stacked overflow-hidden flex flex-col">
+  <!-- Dashboard Header -->
+  <div class="bg-primary/5 px-6 py-4 border-b border-hairline flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2 mb-1">
+        <span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-mono rounded-full uppercase tracking-wider">Demystified Analysis</span>
+        <span class="text-xs text-muted font-mono">Report ID: HS-92841</span>
+      </div>
+      <h3 class="text-xl font-display font-medium text-primary">Your Decoded Biomarkers</h3>
+    </div>
+    <!-- Active Condition Tab Bar -->
+    <div class="flex gap-1.5 p-1 bg-primary/10 rounded-full w-fit max-w-full overflow-x-auto self-start md:self-auto scrollbar-none" role="tablist" aria-label="Health Profile Mockups">
+      <button 
+        type="button" 
+        role="tab" 
+        aria-selected="true" 
+        aria-controls="thyroid-panel" 
+        id="tab-thyroid"
+        class="tab-btn px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 bg-primary text-white"
+      >
+        Thyroid
+      </button>
+      <button 
+        type="button" 
+        role="tab" 
+        aria-selected="false" 
+        aria-controls="pcos-panel" 
+        id="tab-pcos"
+        class="tab-btn px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 text-primary hover:bg-primary/5"
+      >
+        PCOS
+      </button>
+      <button 
+        type="button" 
+        role="tab" 
+        aria-selected="false" 
+        aria-controls="diabetes-panel" 
+        id="tab-diabetes"
+        class="tab-btn px-4 py-1.5 rounded-full text-xs font-sans font-medium transition-all duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 text-primary hover:bg-primary/5"
+      >
+        Pre-Diabetes
+      </button>
+    </div>
+  </div>
+
+  <!-- Dashboard Body - Panels -->
+  <div class="p-4 sm:p-6 md:p-8">
+    
+    <!-- 1. THYROID PANEL -->
+    <div id="thyroid-panel" class="tab-panel space-y-6" role="tabpanel" aria-labelledby="tab-thyroid">
+      <!-- Biomarker Grid -->
+      <div class="border border-hairline rounded-md overflow-hidden bg-canvas-soft">
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2 border-b border-hairline bg-primary/5 text-[9px] sm:text-[10px] font-mono text-muted uppercase tracking-wider">
+          <div>Biomarker</div>
+          <div class="text-right">Your Value</div>
+          <div class="text-right">Reference Range</div>
+          <div class="text-center">Status</div>
+        </div>
+        <div class="divide-y divide-hairline">
+          <!-- Row 1 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">TSH</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Thyroid Stimulating</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              6.82<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">μIU/mL</span>
+            </div>
+            <div class="text-right font-mono text-muted">0.45 – 4.50</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-amber-50 text-amber-700 border border-amber-200">High</span>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">Free T4</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Thyroxine, Free</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              1.15<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">ng/dL</span>
+            </div>
+            <div class="text-right font-mono text-muted">0.80 – 1.80</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">Normal</span>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">Free T3</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Triiodothyronine</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              2.90<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">pg/mL</span>
+            </div>
+            <div class="text-right font-mono text-muted">2.30 – 4.20</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">Normal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clinical-but-warm Analysis -->
+      <div class="grid md:grid-cols-2 gap-6 pt-2">
+        <div class="border border-hairline rounded-md p-5 bg-canvas relative">
+          <div class="absolute top-4 right-4 text-primary opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z" />
+            </svg>
+          </div>
+          <h4 class="text-sm font-mono text-muted uppercase tracking-wider mb-2">Clinical Explanation</h4>
+          <p class="text-sm text-ink leading-relaxed font-sans text-pretty">
+            Your elevated <strong class="font-medium">TSH</strong> level (6.82) alongside normal <strong class="font-medium">Free T4</strong> indicates <strong class="text-primary font-medium">Subclinical Hypothyroidism</strong>. Your brain's pituitary gland is working slightly harder to signal your thyroid gland to produce hormones. This is a very common condition in India and is a frequent contributor to feelings of low energy, mild cold sensitivity, and difficulty in weight management.
+          </p>
+        </div>
+
+        <div class="border border-hairline rounded-md p-5 bg-canvas relative">
+          <div class="absolute top-4 right-4 text-accent opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <h4 class="text-sm font-mono text-muted uppercase tracking-wider mb-2">Saral Action Plan</h4>
+          <ul class="space-y-3 text-sm text-ink">
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Indian Diet Adjustment:</strong> Incorporate iodine-rich and selenium-rich foods like whole wheat, dal, and home-cooked greens. Always cook cruciferous veggies (cabbage, cauliflower, broccoli) instead of eating them raw.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Lifestyle Support:</strong> Engage in 30 minutes of moderate-intensity activities (e.g., brisk walking or thyroid yoga postures) to aid metabolic function and manage fatigue.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Clinical Recommendation:</strong> Share these results with an Endocrinologist. Monitoring TSH again in 8–12 weeks is typically advised before discussing medication.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PCOS PANEL (Hidden by default) -->
+    <div id="pcos-panel" class="tab-panel hidden space-y-6" role="tabpanel" aria-labelledby="tab-pcos">
+      <!-- Biomarker Grid -->
+      <div class="border border-hairline rounded-md overflow-hidden bg-canvas-soft">
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2 border-b border-hairline bg-primary/5 text-[9px] sm:text-[10px] font-mono text-muted uppercase tracking-wider">
+          <div>Biomarker</div>
+          <div class="text-right">Your Value</div>
+          <div class="text-right">Reference Range</div>
+          <div class="text-center">Status</div>
+        </div>
+        <div class="divide-y divide-hairline">
+          <!-- Row 1 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">LH / FSH</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Luteinizing / FSH</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">2.81</div>
+            <div class="text-right font-mono text-muted">~1.00</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-rose-50 text-rose-700 border border-rose-200">High Ratio</span>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">AMH</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Anti-Müllerian</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              7.40<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">ng/dL</span>
+            </div>
+            <div class="text-right font-mono text-muted">1.50 – 4.00</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-rose-50 text-rose-700 border border-rose-200">High</span>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">Fasting Ins.</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Insulin, Serum</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              18.5<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">μIU/mL</span>
+            </div>
+            <div class="text-right font-mono text-muted">2.0 – 12.0</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-rose-50 text-rose-700 border border-rose-200">High</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clinical-but-warm Analysis -->
+      <div class="grid md:grid-cols-2 gap-6 pt-2">
+        <div class="border border-hairline rounded-md p-5 bg-canvas relative">
+          <div class="absolute top-4 right-4 text-primary opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z" />
+            </svg>
+          </div>
+          <h4 class="text-sm font-mono text-muted uppercase tracking-wider mb-2">Clinical Explanation</h4>
+          <p class="text-sm text-ink leading-relaxed font-sans text-pretty">
+            Your ratio of <strong class="font-medium">LH to FSH</strong> is elevated (2.81) and your <strong class="font-medium">AMH</strong> is high, which are classic blood-work indicators of <strong class="text-primary font-medium">Polycystic Ovary Syndrome (PCOS)</strong>. The elevated <strong class="font-medium">Fasting Insulin</strong> (18.5) strongly suggests underlying insulin resistance. Insulin resistance prevents cells from absorbing glucose efficiently, causing the ovaries to produce excess androgens, leading to irregular cycles, acne, and weight retention.
+          </p>
+        </div>
+
+        <div class="border border-hairline rounded-md p-5 bg-canvas relative">
+          <div class="absolute top-4 right-4 text-accent opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <h4 class="text-sm font-mono text-muted uppercase tracking-wider mb-2">Saral Action Plan</h4>
+          <ul class="space-y-3 text-sm text-ink">
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Insulin-Sensitizing Indian Diet:</strong> Limit simple carbs (maida, white rice, sugary tea). Replace them with low-glycemic, high-fiber alternatives like *besan chilla, sprouted chana, oats, sattu*, and plenty of raw fiber before lunch.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Exercise Therapy:</strong> Prioritize progressive strength training 3x/week. Muscle acts as a sink for glucose, greatly improving insulin sensitivity. Add 10-minute post-meal walks.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Clinical Recommendation:</strong> Discuss anti-androgen therapy or natural insulin sensitizers (like Myo-Inositol) with a Gynaecologist or Reproductive Endocrinologist.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PRE-DIABETES PANEL (Hidden by default) -->
+    <div id="diabetes-panel" class="tab-panel hidden space-y-6" role="tabpanel" aria-labelledby="tab-diabetes">
+      <!-- Biomarker Grid -->
+      <div class="border border-hairline rounded-md overflow-hidden bg-canvas-soft">
+        <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2 border-b border-hairline bg-primary/5 text-[9px] sm:text-[10px] font-mono text-muted uppercase tracking-wider">
+          <div>Biomarker</div>
+          <div class="text-right">Your Value</div>
+          <div class="text-right">Reference Range</div>
+          <div class="text-center">Status</div>
+        </div>
+        <div class="divide-y divide-hairline">
+          <!-- Row 1 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">HbA1c</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Glycated Hb</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">5.90%</div>
+            <div class="text-right font-mono text-muted">&lt; 5.70%</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-amber-50 text-amber-700 border border-amber-200">Pre-Diab.</span>
+            </div>
+          </div>
+          <!-- Row 2 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">Fasting Gluc.</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">Blood Sugar</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              108<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">mg/dL</span>
+            </div>
+            <div class="text-right font-mono text-muted">70 – 99</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-amber-50 text-amber-700 border border-amber-200">High</span>
+            </div>
+          </div>
+          <!-- Row 3 -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-4 px-3 sm:px-4 py-2.5 sm:py-3 items-center text-xs sm:text-sm">
+            <div>
+              <span class="font-medium text-ink block leading-tight">Vitamin D3</span>
+              <span class="text-[10px] sm:text-xs text-muted block truncate md:text-clip">25-Hydroxy D</span>
+            </div>
+            <div class="text-right font-mono font-medium text-ink">
+              18.2<span class="block sm:inline sm:ml-1 text-[9px] sm:text-xs text-muted font-sans font-normal">ng/mL</span>
+            </div>
+            <div class="text-right font-mono text-muted">30.0 – 100</div>
+            <div class="flex justify-center">
+              <span class="px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sans font-medium bg-blue-50 text-blue-700 border border-blue-200">Deficient</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Clinical-but-warm Analysis -->
+      <div class="grid md:grid-cols-2 gap-6 pt-2">
+        <div class="border border-hairline rounded-md p-5 bg-canvas relative">
+          <div class="absolute top-4 right-4 text-primary opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3Z" />
+            </svg>
+          </div>
+          <h4 class="text-sm font-mono text-muted uppercase tracking-wider mb-2">Clinical Explanation</h4>
+          <p class="text-sm text-ink leading-relaxed font-sans text-pretty">
+            Your average blood sugar over the last 90 days (<strong class="font-medium">HbA1c</strong> of 5.9%) falls in the <strong class="text-primary font-medium">Pre-Diabetes</strong> range (5.7% to 6.4%). Your body is developing resistance to insulin, meaning glucose is building up in your blood instead of being used for energy. This is compounded by <strong class="font-medium">Vitamin D deficiency</strong> (18.2), which is highly prevalent in India and is clinically shown to worsen insulin resistance and impair pancreatic insulin secretion.
+          </p>
+        </div>
+
+        <div class="border border-hairline rounded-md p-5 bg-canvas relative">
+          <div class="absolute top-4 right-4 text-accent opacity-20">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <h4 class="text-sm font-mono text-muted uppercase tracking-wider mb-2">Saral Action Plan</h4>
+          <ul class="space-y-3 text-sm text-ink">
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Reversing Pre-Diabetes:</strong> Prioritize protein and healthy fats in every meal. Eat veggies first, proteins second, and complex carbs (like hand-pounded red/brown rice or multigrain roti) last to blunt blood glucose spikes.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Vitamin D Optimization:</strong> Take safe Vitamin D3 supplementation (e.g., 60k IU weekly, under supervision) and spend 15 minutes in early morning sunlight to help restore cellular health.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent mt-2 shrink-0"></span>
+              <span><strong class="font-medium">Clinical Recommendation:</strong> Share these levels with your family doctor. Pre-diabetes is fully reversible at this stage through lifestyle modifications alone.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Simple interactive tab switching logic for Astro component
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // 1. Reset all tab buttons state
+      tabButtons.forEach(button => {
+        button.setAttribute('aria-selected', 'false');
+        button.classList.remove('bg-primary', 'text-white');
+        button.classList.add('text-primary', 'hover:bg-primary/5');
+      });
+
+      // 2. Hide all panels
+      tabPanels.forEach(panel => {
+        panel.classList.add('hidden');
+      });
+
+      // 3. Set active button state
+      btn.setAttribute('aria-selected', 'true');
+      btn.classList.remove('text-primary', 'hover:bg-primary/5');
+      btn.classList.add('bg-primary', 'text-white');
+
+      // 4. Show corresponding panel
+      const targetPanelId = btn.getAttribute('aria-controls');
+      if (targetPanelId) {
+        const targetPanel = document.getElementById(targetPanelId);
+        if (targetPanel) {
+          targetPanel.classList.remove('hidden');
+        }
+      }
+    });
+  });
+</script>

@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Server Error — 500 | HealthSaral"
+  description="We are experiencing an internal server issue. HealthSaral engineering has been notified."
+>
+  <Header />
+
+  <main class="flex-grow flex items-center justify-center min-h-[60vh] bg-mesh-gradient px-4 py-16 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full text-center space-y-6">
+      <!-- Error Code -->
+      <span class="text-6xl sm:text-7xl font-display font-extrabold text-primary block">
+        500
+      </span>
+      
+      <!-- Headline -->
+      <h1 class="text-2xl sm:text-3xl font-display font-bold text-primary tracking-tight">
+        Something went wrong
+      </h1>
+      
+      <!-- Description -->
+      <p class="text-sm sm:text-base text-muted leading-relaxed max-w-sm mx-auto text-pretty">
+        We're experiencing an internal server issue. Our engineering team has been notified and is looking into it. Please try reloading the page.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+        <button 
+          id="reload-button"
+          class="w-full sm:w-auto px-6 py-2.5 bg-accent hover:bg-accent/90 text-white text-sm font-sans font-medium rounded-full shadow-sm transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer"
+        >
+          Reload Page
+        </button>
+        <a 
+          href="/" 
+          class="w-full sm:w-auto px-6 py-2.5 border border-hairline hover:bg-primary/5 text-primary text-sm font-sans font-medium rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          Back to Home
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const reloadBtn = document.getElementById('reload-button');
+  if (reloadBtn) {
+    reloadBtn.addEventListener('click', () => {
+      window.location.reload();
+    });
+  }
+</script>

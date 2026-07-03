@@ -1,0 +1,704 @@
+---
+import Layout from '../layouts/Layout.astro';
+import UploadPlaceholder from '../components/UploadPlaceholder.astro';
+import InteractiveDashboard from '../components/InteractiveDashboard.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="AI Lab Report Analyzer — Free Online Blood Test Analysis | HealthSaral"
+  description="HealthSaral is a free AI lab report analyzer & online blood test reader. Understand your WBC, RBC, HGB, anemia, diabetes, and allergy results explained in plain language."
+>
+  <Header />
+
+  <!-- 2. Hero Section with Mesh Gradient -->
+  <section id="upload-section" class="relative overflow-hidden bg-mesh-gradient pt-10 pb-16 md:pt-14 md:pb-24 px-4 sm:px-6 lg:px-8 border-b border-hairline">
+    <div class="max-w-4xl mx-auto text-center flex flex-col items-center">
+      <!-- Small Monospace Tag -->
+      <span class="inline-flex items-center justify-center gap-1.5 px-3.5 py-1.5 bg-primary/5 border border-primary/10 text-primary text-[9px] sm:text-[11px] font-mono rounded-full uppercase tracking-wider mb-6 max-w-full text-center whitespace-normal">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shrink-0"></span>
+        <span class="text-balance leading-normal">Doctor-Reviewed AI Blood Test Reader & Lab Report Analyzer</span>
+      </span>
+
+      <!-- Title -->
+      <h1 class="text-2xl sm:text-4xl md:text-5xl lg:text-[54px] font-display font-bold text-primary tracking-tight md:tracking-tighter leading-[1.1] max-w-3xl mb-4 text-balance">
+        Upload any report. Let AI explain what it actually means.
+      </h1>
+
+      <!-- Description -->
+      <p class="text-sm sm:text-base md:text-[17px] font-sans text-muted max-w-xl mb-8 leading-relaxed text-pretty">
+        Upload any lab report — blood test, thyroid panel, lipid profile, or full body checkup. HealthSaral explains every marker in plain language and gives you a personalized health plan, not just a list of numbers.
+      </p>
+
+      <!-- Upload Widget Placeholder -->
+      <div class="w-full max-w-lg mb-8">
+        <UploadPlaceholder />
+      </div>
+
+      <!-- Trust Badges & Safe Text -->
+      <div class="flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-xs font-mono text-muted/90">
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.746 3.746 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+          </svg>
+          <span>DOCTOR-REVIEWED MEDICAL LOGIC</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+          </svg>
+          <span>HIPAA & GDPR COMPLIANT SECURITY</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-primary" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 21l8.982-11.761h-6.803L12 3 3.018 14.761h6.795L9.813 15.904Z" />
+          </svg>
+          <span>FREE FOR 1st REPORT</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Trust Bar / Stats -->
+  <section class="py-10 bg-canvas border-b border-hairline overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-[11px] font-mono text-muted uppercase tracking-wider mb-6">Empowering thousands of healthy decisions daily</p>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto items-center">
+        <div class="flex flex-col items-center">
+          <span class="text-3xl font-display font-bold text-primary">15,000+</span>
+          <span class="text-xs text-muted font-sans mt-1">Reports Analyzed</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-3xl font-display font-bold text-primary">99.8%</span>
+          <span class="text-xs text-muted font-sans mt-1">Parsing Accuracy</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-3xl font-display font-bold text-primary">ISO 27001</span>
+          <span class="text-xs text-muted font-sans mt-1">Security Standard</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-3xl font-display font-bold text-primary">100%</span>
+          <span class="text-xs text-muted font-sans mt-1">Indian Food Customization</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. How It Works Section -->
+  <section id="how-it-works" class="py-20 md:py-28 bg-canvas-soft border-b border-hairline px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-mono text-primary/80 uppercase tracking-widest block mb-3">SIMPLIFIED WORKFLOW</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-primary text-balance">
+          Three steps to understanding your health.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Step 1 -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-sm-stacked hover:shadow-md-stacked transition-all duration-300">
+          <div class="w-10 h-10 rounded-full bg-primary/10 text-primary font-mono text-sm flex items-center justify-center font-bold mb-6">
+            01
+          </div>
+          <h3 class="text-lg font-display font-medium text-primary mb-3">Upload your lab report</h3>
+          <p class="text-sm text-muted leading-relaxed text-pretty">
+            Simply drag and drop a PDF from your computer, or take a picture of your physical report sheet on your phone.
+          </p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-sm-stacked hover:shadow-md-stacked transition-all duration-300">
+          <div class="w-10 h-10 rounded-full bg-primary/10 text-primary font-mono text-sm flex items-center justify-center font-bold mb-6">
+            02
+          </div>
+          <h3 class="text-lg font-display font-medium text-primary mb-3">AI extracts clinical markers</h3>
+          <p class="text-sm text-muted leading-relaxed text-pretty">
+            Our specialized algorithms read values, map them with standard reference ranges, and filter out the noise.
+          </p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="bg-canvas border border-hairline rounded-lg p-6 shadow-sm-stacked hover:shadow-md-stacked transition-all duration-300">
+          <div class="w-10 h-10 rounded-full bg-primary/10 text-primary font-mono text-sm flex items-center justify-center font-bold mb-6">
+            03
+          </div>
+          <h3 class="text-lg font-display font-medium text-primary mb-3">Get your Saral Action Plan</h3>
+          <p class="text-sm text-muted leading-relaxed text-pretty">
+            Receive clean explanations and localized diet charts focusing on Indian food elements, along with physician talking points.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Sample Output Preview Section -->
+  <section id="sample-preview" class="py-20 md:py-28 bg-canvas border-b border-hairline px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-mono text-primary/80 uppercase tracking-widest block mb-3">INTERACTIVE DEMONSTRATION</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-primary mb-4 text-balance">
+          Read your lab report like a narrative.
+        </h2>
+        <p class="text-sm sm:text-base text-muted text-balance leading-relaxed">
+          Forget typing numbers into generic, frightening search engines. HealthSaral breaks down complex medical markers with clinical warmth and clarity. Explore the mockups below.
+        </p>
+      </div>
+
+      <!-- Interactive Mockup Component -->
+      <InteractiveDashboard />
+    </div>
+  </section>
+
+  <!-- 6. Why HealthSaral Section -->
+  <section id="why-saral" class="py-20 md:py-28 bg-canvas-soft border-b border-hairline px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-mono text-primary/80 uppercase tracking-widest block mb-3">THE HEALTHSARAL DIFFERENCE</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-primary text-balance">
+          Designed to calm anxiety, not trigger it.
+        </h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Benefit 1 -->
+        <div class="flex flex-col gap-4">
+          <div class="w-12 h-12 bg-primary/5 text-primary rounded-lg flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.129-1.125V14.25M3 14.25h18M4 10.5h16m-8-6h.008v.008H12V4.5Z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-display font-medium text-primary mb-2">Tailored for the Indian lifestyle</h3>
+            <p class="text-sm text-muted leading-relaxed text-pretty">
+              Standard nutrition recommendations mention ingredients like kale, avocado, or quinoa which are expensive or unavailable. We translate clinical guidelines into localized diet advice using lentils, paneer, sattu, and common vegetables.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="flex flex-col gap-4">
+          <div class="w-12 h-12 bg-primary/5 text-primary rounded-lg flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 0 1-6.364 0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-display font-medium text-primary mb-2">Calming, reassuring tone</h3>
+            <p class="text-sm text-muted leading-relaxed text-pretty">
+              Health anxiety is real. When you look up thyroid or high glucose levels online, search engines often jump to worst-case scenarios. HealthSaral emphasizes subclinical ranges, context, and clear actions to reduce panic.
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="flex flex-col gap-4">
+          <div class="w-12 h-12 bg-primary/5 text-primary rounded-lg flex items-center justify-center shrink-0">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.03 0 1.9.693 2.166 1.638m-7.377 12.475L9 16.25m-3 3 1.5-3.375M9 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18M3 16.25h18" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-display font-medium text-primary mb-2">Physician-Reviewed Guidance</h3>
+            <p class="text-sm text-muted leading-relaxed text-pretty">
+              Our clinical logic is designed by medical practitioners and nutritionists specializing in PCOS and endocrine health. All generated talking points are structured to help you make the most of your time with a physician.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Safety / Disclaimer Notice Section -->
+  <section class="py-12 bg-canvas px-4 sm:px-6 lg:px-8 border-b border-hairline">
+    <div class="max-w-3xl mx-auto border border-amber-200/50 bg-amber-50/30 dark:border-amber-900/30 dark:bg-amber-950/20 rounded-lg p-6 flex gap-4 items-start shadow-sm">
+      <div class="shrink-0 mt-0.5 text-amber-600 dark:text-amber-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+        </svg>
+      </div>
+      <div>
+        <h4 class="text-sm font-sans font-semibold text-amber-800 dark:text-amber-200 mb-1">Clinical Safety Disclaimer</h4>
+        <p class="text-xs text-amber-800/80 dark:text-amber-300/80 leading-relaxed text-pretty">
+          HealthSaral is an educational platform. The AI report explanations and nutrition plans provided are designed for general wellness guidance and to assist you in doctor discussions. They are <strong>not</strong> medical diagnoses, prescriptions, or treatments. Always consult with a registered healthcare professional before altering medication or starting a clinical diet.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Pricing Section -->
+  <section id="pricing" class="py-20 md:py-28 bg-canvas border-b border-hairline px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="text-xs font-mono text-primary/80 uppercase tracking-widest block mb-3">TRANSPARENT TIERING</span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-primary mb-4 text-balance">
+          Simple, risk-free membership.
+        </h2>
+        <p class="text-sm text-muted text-balance">
+          Try your first report for free. No credit card required.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+        <!-- Free Plan -->
+        <div class="border border-hairline rounded-lg bg-canvas-soft p-8 flex flex-col justify-between shadow-sm hover:shadow-md-stacked transition-all duration-300">
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-display font-medium text-primary">Free Tier</h3>
+              <span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-mono rounded uppercase tracking-wider">Basic</span>
+            </div>
+            <div class="flex items-baseline mb-6">
+              <span class="text-4xl font-display font-bold text-primary">₹0</span>
+              <span class="text-xs text-muted ml-2 font-mono">/ NO EXPIRY</span>
+            </div>
+            <p class="text-sm text-muted mb-6">Perfect for checking a single test result immediately.</p>
+            <ul class="space-y-3.5 mb-8 text-sm text-ink" role="list">
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Decode 1 blood test report (PDF/Photo)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Basic explanation of standard markers</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-primary shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Printable PDF report outline</span>
+              </li>
+            </ul>
+          </div>
+          <a 
+            href="#upload-section" 
+            class="block w-full py-2.5 text-center bg-primary text-white hover:bg-primary/95 text-sm font-sans font-medium rounded-full transition-colors cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+          >
+            Upload Report
+          </a>
+        </div>
+
+        <!-- Premium Plan (Polarity Flipped - Dark Styled) -->
+        <div class="border border-primary rounded-lg bg-primary text-white p-8 flex flex-col justify-between shadow-lg-stacked hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+          <!-- Featured Tag -->
+          <div class="absolute top-0 right-0 bg-accent text-white text-[10px] font-mono font-bold uppercase tracking-wider py-1 px-4 rounded-bl">
+            Best Value
+          </div>
+          
+          <div>
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-display font-medium text-white">Saral Premium</h3>
+              <span class="px-2 py-0.5 bg-white/20 text-white text-[10px] font-mono rounded uppercase tracking-wider">Unlimited</span>
+            </div>
+            <div class="flex items-baseline mb-6">
+              <span class="text-4xl font-display font-bold text-white">₹499</span>
+              <span class="text-xs text-white/70 ml-2 font-mono">/ ANNUALLY</span>
+            </div>
+            <p class="text-sm text-white/80 mb-6">Complete ongoing tracking and tailored plans for PCOS, thyroid & diabetes health.</p>
+            <ul class="space-y-3.5 mb-8 text-sm text-white/90" role="list">
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-accent shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Unlimited blood test report decodes</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-accent shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Biomarker history tracking (see your progress)</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-accent shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Tailored Indian dietitian recipe plans</span>
+              </li>
+              <li class="flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-accent shrink-0" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                </svg>
+                <span>Doctor discussion guides for appointments</span>
+              </li>
+            </ul>
+          </div>
+          <a 
+            href="#upload-section" 
+            class="block w-full py-2.5 text-center bg-accent text-white hover:bg-accent/90 text-sm font-sans font-medium rounded-full transition-colors cursor-pointer shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          >
+            Get Premium Access
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Final CTA Section -->
+  <section class="py-16 md:py-24 bg-primary/5 border-y border-hairline text-center px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold mb-6 text-balance leading-tight">
+        Take control of your health diagnostics.
+      </h2>
+      <p class="text-base sm:text-lg text-muted max-w-xl mb-8 text-balance">
+        Stop worrying about unexplained lab markers. Securely upload your report today and learn exactly what it means for your body.
+      </p>
+      <a 
+        href="#upload-section" 
+        class="px-8 py-3 bg-accent hover:bg-accent/90 text-white font-sans font-medium text-sm rounded-full shadow-lg transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Decode My Report Now
+      </a>
+      <span class="text-[11.5px] text-primary/80 font-mono mt-4 uppercase tracking-wider">✦ DECODE YOUR FIRST LAB REPORT FREE WITH INDIA'S SECURE AI BLOOD TEST ANALYZER</span>
+    </div>
+  </section>
+
+  <!-- SEO Content Section -->
+  <section class="py-16 md:py-20 bg-canvas-soft border-t border-hairline px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-10 text-center md:text-left">
+        <span class="text-xs font-mono text-primary/80 uppercase tracking-widest block mb-3">EDUCATIONAL GUIDE</span>
+        <h2 class="text-2xl sm:text-3xl font-display font-bold text-primary mb-4">
+          Understanding Blood Analysis & Lab Reports: A Patient's Guide
+        </h2>
+        <p class="text-sm sm:text-base text-muted max-w-2xl leading-relaxed">
+          Demystifying complex laboratory values so you can take active control of your healthcare journey and advocate for yourself.
+        </p>
+      </div>
+
+      <div class="prose dark:prose-invert max-w-none text-ink text-sm sm:text-base leading-relaxed space-y-8 font-sans">
+        <p>
+          Medical reports can feel like another language. When you receive a blood test sheet, you are faced with abbreviations like WBC, RBC, HGB, and references that offer little explanation. Learning <strong>how to read a blood test</strong> is crucial for active patient advocacy. While standard portals give you columns of numbers, using an <strong>AI lab report analyzer</strong> can bridge the gap between clinical raw data and patient comprehension. HealthSaral offers a premium <strong>free lab report software</strong> tool designed to help you decode these numbers safely, accurately, and in plain terms.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 my-8">
+          <div class="border border-hairline bg-canvas p-6 rounded-lg shadow-sm-stacked">
+            <h3 class="text-base sm:text-lg font-display font-semibold text-primary mb-3">Red & White Blood Cell Analysis</h3>
+            <p class="text-xs sm:text-sm text-muted mb-4">
+              A Complete Blood Count (CBC) examines cellular components crucial for immunity and oxygen transport.
+            </p>
+            <ul class="space-y-2 text-xs sm:text-sm" role="list">
+              <li>
+                <strong>Blood Analysis RBC:</strong> Red blood cells carry oxygen. Low counts may cause fatigue, whereas high levels point to hydration or respiratory factors.
+              </li>
+              <li>
+                <strong>Blood Analysis HGB:</strong> Hemoglobin is the protein in RBCs carrying oxygen. Understanding <strong>anemia blood test results explained</strong> through HGB values helps verify tissue oxygenation.
+              </li>
+              <li>
+                <strong>Blood Analysis WBC:</strong> White blood cells indicate active infection or immune system demand when elevated.
+              </li>
+              <li>
+                <strong>Blood Analysis Plates:</strong> Platelet counts (or plates analysis) are crucial to verify normal blood coagulation and clotting pathways.
+              </li>
+            </ul>
+          </div>
+
+          <div class="border border-hairline bg-canvas p-6 rounded-lg shadow-sm-stacked">
+            <h3 class="text-base sm:text-lg font-display font-semibold text-primary mb-3">Allergy panels & IgE Response</h3>
+            <p class="text-xs sm:text-sm text-muted mb-4">
+              Allergic reactions prompt immune responses mediated by Immunoglobulin E (IgE) antibodies.
+            </p>
+            <ul class="space-y-2 text-xs sm:text-sm" role="list">
+              <li>
+                <strong>IgE blood test results explained:</strong> Elevated IgE indicates that your immune system is responding to internal allergens or external triggers.
+              </li>
+              <li>
+                <strong>Food allergy blood test results explained:</strong> Pinpointing sensitivities to dairy, wheat, or nuts prevents inflammatory immune flares.
+              </li>
+              <li>
+                <strong>Allergy blood test results explained:</strong> Mapping airborne, chemical, or animal triggers helps you construct a clinical avoidance plan.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-lg sm:text-xl font-display font-semibold text-primary">Chronic Metabolic Health: Diabetes and Sugar Indicators</h3>
+          <p>
+            Blood sugar regulation is a key indicator of metabolic stability. When examining <strong>diabetes blood test results explained</strong>, standard panels evaluate Fasting Blood Glucose and HbA1c. Fasting glucose displays your blood sugar at a single point in time, while HbA1c provides a three-month weighted average of your blood glucose levels.
+          </p>
+          <p>
+            Understanding these values through a <strong>free lab report check</strong> helps highlight shifts in insulin sensitivity early. Rather than triggering health anxiety, seeing prediabetic or subclinical values explained with warm context helps you work with a clinician to make preventive diet and exercise shifts before clinical intervention is required.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          <h3 class="text-lg sm:text-xl font-display font-semibold text-primary">Pregnancy and Nutritional Blood Profiling</h3>
+          <p>
+            Prenatal care relies heavily on laboratory diagnostics. A <strong>blood analysis for pregnancy</strong> focuses on vital markers like maternal HGB levels, blood type compatibility, gestational glucose, and iron reserves. Keeping these cell counts within target ranges ensures optimal prenatal health.
+          </p>
+          <p>
+            Similarly, a <strong>blood analysis nutrition</strong> profile checks for vital vitamins and trace minerals, such as Vitamin D3, Vitamin B12, and iron saturation. If your nutritional levels are deficient, our system helps you identify dietary fixes utilizing local, standard ingredients, translating clinical deficiencies into actionable meal modifications.
+          </p>
+        </div>
+
+        <div class="border-t border-hairline pt-6 text-xs text-muted leading-relaxed">
+          <p>
+            Whether you are looking for a simple <strong>free report analysis</strong>, a <strong>free lab report check</strong>, or a complete <strong>blood analysis online</strong>, HealthSaral provides a secure gateway to learning about your body. We believe in providing <strong>free online blood test report analysis</strong> to build patient advocacy, ensuring you enter your doctor's clinic informed, confident, and prepared. Try our <strong>blood test report analysis online ai</strong> today to start tracking your laboratory data securely.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section with JSON-LD -->
+  <section class="py-16 md:py-20 bg-canvas border-t border-hairline px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+      <div class="mb-12 text-center">
+        <span class="text-xs font-mono text-primary/80 uppercase tracking-widest block mb-3">COMMON QUESTIONS</span>
+        <h2 class="text-2xl sm:text-3xl font-display font-bold text-primary mb-4">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-sm sm:text-base text-muted max-w-xl mx-auto leading-relaxed">
+          Quick answers about online blood analysis, using our AI medical report analyzer, and learning how lab report readers work.
+        </p>
+      </div>
+
+      <div class="space-y-4 max-w-3xl mx-auto">
+        <!-- FAQ 1 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">Is there a service for lab report analysis online free?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>Yes, HealthSaral provides a tool for <strong>lab report analysis online free</strong> (also available as a <strong>lab report analysis online free AI</strong>). You can securely upload your PDF or image files to get an instant, clear translation of your laboratory metrics without any jargon.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">How can I enter blood test results online free?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>To <strong>enter blood test results online free</strong>, you can use our smart <strong>lab test report reader</strong>. Simply drag and drop your report PDF or take a clear photo of your lab printout. The AI automatically scans, reads, and inputs your markers to produce an explanatory dashboard.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">What makes HealthSaral the best AI blood test Analyzer?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>HealthSaral is designed as the <strong>best AI blood test Analyzer</strong> because of its patient-first design, calm tone, and specialized Indian context. Instead of generic health warnings, it highlights subclinical values and translates clinical guidance into localized diet charts featuring common, affordable Indian foods like lentils, paneer, and common seasonal grains.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">Where can I get a medical report analysis online free?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>You can get a detailed <strong>medical report analysis online free</strong> by registering on our platform. Our <strong>AI medical report analyzer online free</strong> parses complete checkup panels, explaining markers like RBC, WBC, and Hemoglobin in an easy-to-read, structured format.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 5 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">Can I input lab results for diagnosis free using AI?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>While you can <strong>input lab results for diagnosis free</strong> of medical jargon, HealthSaral provides educational translations, not clinical diagnoses. For a formal <strong>medical report analysis free</strong>, always consult a certified medical professional who can review your metrics alongside your clinical history.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 6 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">How to do a medical test report check online?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>To perform a <strong>medical test report check online</strong> or a <strong>health report check online</strong>, simply drag and drop your digital report into our secure portal. The AI immediately analyzes your numbers and compares them to standard reference limits, offering a clear visual dashboard of your health markers.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 7 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">How to read medical report sheets without medical training?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>If you want to know <strong>how to read medical report</strong> printouts, start by looking for values highlighted with "H" (High) or "L" (Low) or values falling outside the printed "Reference Intervals". For a comprehensive, stress-free explanation of what each high/low marker means, you can upload it directly to HealthSaral.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 8 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">What is a blood chemistry analyzer, and how does it work?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>A <strong>blood chemistry analyzer</strong> is a laboratory instrument used to measure chemical concentrations in blood serum or plasma. If you wonder <strong>how does a blood chemistry analyzer work</strong>, it typically utilizes centrifugation to separate plasma, mixes the fluid with specific chemical reagents, and uses light absorption (spectrophotometry) or electrochemistry to measure levels of glucose, lipids, kidney markers, and liver enzymes.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 9 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">What does a blood gas analyzer measure, and how does it work?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>A blood gas analyzer is a critical-care instrument. If you ask <strong>what does a blood gas analyzer measure</strong>, it assesses the levels of oxygen (pO2), carbon dioxide (pCO2), pH, and bicarbonate in an arterial blood sample. When reviewing <strong>how does blood gas analyzer work</strong>, the machine utilizes highly sensitive electrochemical electrodes (glass pH electrodes, Severinghaus carbon dioxide sensors, and Clark oxygen sensors) to detect tiny electrical potential changes and calculate gas concentration values instantly.</p>
+          </div>
+        </details>
+
+        <!-- FAQ 10 -->
+        <details class="group border border-hairline bg-canvas rounded-lg [&_summary::-webkit-details-marker]:hidden">
+          <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-4 text-primary font-display font-medium text-base sm:text-lg focus-visible:ring-2 focus-visible:ring-primary rounded-t-lg select-none">
+            <h3 class="text-base sm:text-lg font-display font-medium m-0">What does a blood analyzer do?</h3>
+            <span class="shrink-0 rounded-full bg-primary/5 p-1.5 text-primary group-open:-rotate-180 transition-transform duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </span>
+          </summary>
+          <div class="px-4 pb-4 text-sm sm:text-base text-muted leading-relaxed border-t border-hairline/20 pt-3">
+            <p>A <strong>blood analyzer</strong> automates clinical testing of blood samples. It counts and categorizes cells (red cells, white cells, platelets) in hematology panels, or reads metabolic and chemical concentrations in chemistry profiles. These machines produce the final quantitative reports that patients later receive from diagnostic labs.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Schema.org JSON-LD FAQ Data -->
+  <script type="application/ld+json" is:inline>
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is there a service for lab report analysis online free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>Yes, HealthSaral provides a tool for <strong>lab report analysis online free</strong> (also available as a <strong>lab report analysis online free AI</strong>). You can securely upload your PDF or image files to get an instant, clear translation of your laboratory metrics without any jargon.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I enter blood test results online free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>To <strong>enter blood test results online free</strong>, you can use our smart <strong>lab test report reader</strong>. Simply drag and drop your report PDF or take a photo of your lab printout. The AI automatically scans, reads, and inputs your markers to produce an explanatory dashboard.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What makes HealthSaral the best AI blood test Analyzer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>HealthSaral is designed as the <strong>best AI blood test Analyzer</strong> because of its patient-first design, calm tone, and specialized Indian context. Instead of generic health warnings, it highlights subclinical values and translates clinical guidance into localized diet charts featuring common, affordable Indian foods like lentils, paneer, and common seasonal grains.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where can I get a medical report analysis online free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>You can get a detailed <strong>medical report analysis online free</strong> by registering on our platform. Our <strong>AI medical report analyzer online free</strong> parses complete checkup panels, explaining markers like RBC, WBC, and Hemoglobin in an easy-to-read, structured format.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I input lab results for diagnosis free using AI?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>While you can <strong>input lab results for diagnosis free</strong> of medical jargon, HealthSaral provides educational translations, not clinical diagnoses. For a formal <strong>medical report analysis free</strong>, always consult a certified medical professional who can review your metrics alongside your clinical history.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to do a medical test report check online?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>To perform a <strong>medical test report check online</strong> or a <strong>health report check online</strong>, simply drag and drop your digital report into our secure portal. The AI immediately analyzes your numbers and compares them to standard reference limits, offering a clear visual dashboard of your health markers.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to read medical report sheets without medical training?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>If you want to know <strong>how to read medical report</strong> printouts, start by looking for values highlighted with 'H' (High) or 'L' (Low) or values falling outside the printed 'Reference Intervals'. For a comprehensive, stress-free explanation of what each high/low marker means, you can upload it directly to HealthSaral.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a blood chemistry analyzer, and how does it work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>A <strong>blood chemistry analyzer</strong> is a laboratory instrument used to measure chemical concentrations in blood serum or plasma. If you wonder <strong>how does a blood chemistry analyzer work</strong>, it typically utilizes centrifugation to separate plasma, mixes the fluid with specific chemical reagents, and uses light absorption (spectrophotometry) or electrochemistry to measure levels of glucose, lipids, kidney markers, and liver enzymes.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a blood gas analyzer measure, and how does it work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>A blood gas analyzer is a critical-care instrument. If you ask <strong>what does a blood gas analyzer measure</strong>, it assesses the levels of oxygen (pO2), carbon dioxide (pCO2), pH, and bicarbonate in an arterial blood sample. When reviewing <strong>how does blood gas analyzer work</strong>, the machine utilizes highly sensitive electrochemical electrodes (glass pH electrodes, Severinghaus carbon dioxide sensors, and Clark oxygen sensors) to detect tiny electrical potential changes and calculate gas concentration values instantly.</p>"
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does a blood analyzer do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "<p>A <strong>blood analyzer</strong> automates clinical testing of blood samples. It counts and categorizes cells (red cells, white cells, platelets) in hematology panels, or reads metabolic and chemical concentrations in chemistry profiles. These machines produce the final quantitative reports that patients later receive from diagnostic labs.</p>"
+          }
+        }
+      ]
+    }
+  </script>
+
+  <Footer />
+</Layout>

@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="Page Not Found — 404 | HealthSaral"
+  description="The page you are looking for does not exist. Return to HealthSaral to check your lab reports."
+>
+  <Header />
+
+  <main class="flex-grow flex items-center justify-center min-h-[60vh] bg-mesh-gradient px-4 py-16 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full text-center space-y-6">
+      <!-- Error Code -->
+      <span class="text-6xl sm:text-7xl font-display font-extrabold text-accent block animate-pulse">
+        404
+      </span>
+      
+      <!-- Headline -->
+      <h1 class="text-2xl sm:text-3xl font-display font-bold text-primary tracking-tight">
+        Oops! Page not found
+      </h1>
+      
+      <!-- Description -->
+      <p class="text-sm sm:text-base text-muted leading-relaxed max-w-sm mx-auto text-pretty">
+        It looks like the link you followed is broken or the page has been moved. Let's get your health tracking back on track.
+      </p>
+
+      <!-- Action Buttons -->
+      <div class="flex flex-col sm:flex-row justify-center items-center gap-4 pt-4">
+        <a 
+          href="/" 
+          class="w-full sm:w-auto px-6 py-2.5 bg-primary text-white hover:bg-primary/95 text-sm font-sans font-medium rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary shadow-sm"
+        >
+          Back to Home
+        </a>
+        <a 
+          href="/contact" 
+          class="w-full sm:w-auto px-6 py-2.5 border border-hairline hover:bg-primary/5 text-primary text-sm font-sans font-medium rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        >
+          Contact Support
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

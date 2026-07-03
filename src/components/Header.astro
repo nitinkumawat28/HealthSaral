@@ -1,0 +1,150 @@
+---
+---
+
+<header class="sticky top-0 z-50 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-2.5 focus-visible:ring-2 focus-visible:ring-primary rounded group" aria-label="HealthSaral Home">
+      <!-- Custom SVG Medical-Leaf Logo -->
+      <svg class="w-7 h-7 shrink-0 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" fill="currentColor" class="text-primary/10 dark:text-primary/20 fill-primary/5 dark:fill-primary/8" stroke-width="1.5"/>
+        <path d="M12 4.5C12 4.5 7 9 7 13.5C7 18 12 19.5 12 19.5M12 4.5C12 4.5 17 9 17 13.5C17 18 12 19.5 12 19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"/>
+        <path d="M7.5 13.5H9.5L11 9L13 17L14.5 13.5H16.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-accent"/>
+      </svg>
+      <span class="font-display text-2xl font-bold tracking-tight text-primary flex items-center">
+        HealthSaral<span class="text-accent ml-0.5 font-sans leading-none">&bull;</span>
+      </span>
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="hidden md:flex items-center gap-1.5" aria-label="Main Navigation">
+      <a href="/#how-it-works" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+        How it works
+      </a>
+      <a href="/#sample-preview" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+        Sample output
+      </a>
+      <a href="/#why-saral" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+        Why HealthSaral
+      </a>
+      <a href="/#pricing" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+        Pricing
+      </a>
+      <a href="/about" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+        About Us
+      </a>
+    </nav>
+
+    <!-- Nav CTAs -->
+    <div class="flex items-center gap-4">
+      <!-- Dark Mode Toggle Button -->
+      <button
+        id="theme-toggle"
+        type="button"
+        class="p-2 rounded-full text-primary hover:bg-primary/5 hover:rotate-12 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer"
+        aria-label="Toggle dark mode"
+      >
+        <!-- Sun Icon (visible in dark mode) -->
+        <svg id="theme-toggle-sun" class="w-4 h-4 hidden dark:block animate-spin-slow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.978 4.978l1.59 1.59m10.862 10.862 1.59 1.59M3 12h2.25m13.5 0H21M4.978 19.022l1.59-1.59m10.862-10.862 1.59-1.59M12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" />
+        </svg>
+        <!-- Moon Icon (visible in light mode) -->
+        <svg id="theme-toggle-moon" class="w-4 h-4 block dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
+        </svg>
+      </button>
+
+      <a href="/#pricing" class="text-xs font-sans font-semibold text-primary hover:text-primary/95 hover:bg-primary/5 border border-transparent hover:border-hairline rounded-full px-4 py-2 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary rounded px-3 py-1.5">
+        Sign In
+      </a>
+      <a 
+        href="/#upload-section" 
+        class="hidden sm:block px-4 py-2 bg-accent hover:bg-accent/90 hover:scale-[1.03] active:scale-[0.97] text-white font-sans font-semibold text-xs rounded-full shadow-sm transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+      >
+        Upload Report
+      </a>
+      
+      <!-- Mobile Menu Toggle -->
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="p-2 rounded-md text-primary hover:bg-primary/5 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer md:hidden"
+        aria-label="Open main menu"
+        aria-expanded="false"
+      >
+        <svg class="w-5 h-5 block" id="menu-icon-closed" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+        <svg class="w-5 h-5 hidden" id="menu-icon-opened" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div 
+    id="mobile-menu" 
+    class="hidden md:hidden absolute top-16 left-0 w-full bg-canvas/95 backdrop-blur-md border-b border-hairline py-6 px-6 flex flex-col gap-5 shadow-lg z-40 transition-all duration-300"
+  >
+    <nav class="flex flex-col gap-4">
+      <a href="/#how-it-works" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">How it works</a>
+      <a href="/#sample-preview" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Sample output</a>
+      <a href="/#why-saral" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Why HealthSaral</a>
+      <a href="/#pricing" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Pricing</a>
+      <a href="/about" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">About Us</a>
+    </nav>
+    <div class="border-t border-hairline pt-4 flex flex-col gap-3">
+      <a href="/#pricing" class="mobile-nav-link text-center py-2.5 text-xs font-sans font-medium text-primary border border-hairline rounded-full hover:bg-primary/5 transition-colors">Sign In</a>
+      <a href="/#upload-section" class="mobile-nav-link text-center py-2.5 bg-accent hover:bg-accent/90 text-white font-sans font-medium text-xs rounded-full shadow-sm transition-all">Upload Report</a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Theme Toggle Logic
+  const toggleBtn = document.getElementById('theme-toggle');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+  }
+
+  // Mobile Menu Toggle Logic
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIconClosed = document.getElementById('menu-icon-closed');
+  const menuIconOpened = document.getElementById('menu-icon-opened');
+  
+  if (mobileMenuToggle && mobileMenu) {
+    mobileMenuToggle.addEventListener('click', () => {
+      const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+      mobileMenuToggle.setAttribute('aria-expanded', String(!isExpanded));
+      mobileMenu.classList.toggle('hidden');
+      
+      if (menuIconClosed && menuIconOpened) {
+        if (!isExpanded) {
+          menuIconClosed.classList.replace('block', 'hidden');
+          menuIconOpened.classList.replace('hidden', 'block');
+        } else {
+          menuIconClosed.classList.replace('hidden', 'block');
+          menuIconOpened.classList.replace('block', 'hidden');
+        }
+      }
+    });
+    
+    // Close mobile menu when nav links are clicked
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+    mobileNavLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        if (menuIconClosed && menuIconOpened) {
+          menuIconClosed.classList.replace('hidden', 'block');
+          menuIconOpened.classList.replace('block', 'hidden');
+        }
+      });
+    });
+  }
+</script>
