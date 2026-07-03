@@ -21,12 +21,30 @@
 
     <!-- Upload Button (Coral CTA) -->
     <button 
+      id="homepage-upload-btn"
       type="button" 
       class="px-5 py-2 bg-accent hover:bg-accent/90 text-white font-sans font-medium text-xs md:text-sm rounded-full shadow-sm transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent cursor-pointer active:scale-98"
       aria-label="Upload blood test report"
     >
       Select Report File
     </button>
+
+<script>
+  import { supabase } from '../lib/supabase.js';
+
+  const uploadBtn = document.getElementById('homepage-upload-btn');
+  uploadBtn?.addEventListener('click', async () => {
+    // Check if the user already has an active Supabase session
+    const { data: { session } } = await supabase.auth.getSession();
+    
+    // Redirect authenticated users to the dashboard, and unauthenticated users to the login flow
+    if (session) {
+      window.location.href = '/dashboard';
+    } else {
+      window.location.href = '/login';
+    }
+  });
+</script>
 
     <!-- Compliance / Size limit info -->
     <p class="text-[9px] md:text-[11px] text-muted/80 mt-3.5 font-mono text-center whitespace-normal max-w-full text-balance leading-normal">

@@ -95,6 +95,15 @@ import Layout from '../layouts/Layout.astro';
 <script>
   import { supabase } from '../lib/supabase.js';
 
+  // Redirect to dashboard if the user is already logged in
+  async function checkSessionOnLoad() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      window.location.href = '/dashboard';
+    }
+  }
+  checkSessionOnLoad();
+
   // Grab required elements from the page DOM
   const emailForm = document.getElementById('email-form');
   const otpForm = document.getElementById('otp-form');
