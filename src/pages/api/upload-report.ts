@@ -69,10 +69,7 @@ export const POST: APIRoute = async ({ request }) => {
       .from('reports')
       .insert({
         user_id: userId,
-        file_path: objectKey,
-        file_name: fileName,
-        file_size: file.size,
-        content_type: contentType,
+        file_url: objectKey,
       })
       .select()
       .single();
