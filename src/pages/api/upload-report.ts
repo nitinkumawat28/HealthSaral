@@ -64,7 +64,32 @@ export const POST: APIRoute = async ({ request }) => {
     // 4. Upload file buffer to Cloudflare R2 private bucket via S3 client
     const objectKey = await uploadFileToR2(fileBuffer, fileName, contentType, userId);
 
-    // 5. Insert report record metadata row into the Supabase "reports" table
+    // 5. Ensure user profile exists in profiles table before inserting report (due to foreign key constraint)
+    const { data: profileExists, error: profileCheckError } = await supabaseAdmin
+      .from('profiles')
+      .select('id')
+      .eq('id', userId)
+      .maybeSingle();
+
+    if (profileCheckError) {
+      console.error('Profile check error:', profileCheckError);
+    }
+
+    if (!profileExists) {
+      const { error: profileInsertError } = await supabaseAdmin
+        .from('profiles')
+        .insert({ id: userId });
+
+      if (profileInsertError) {
+        console.error('Failed to create missing profile:', profileInsertError);
+        return new Response(
+          JSON.stringify({ message: 'Server error. Failed to initialize user profile.' }),
+          { status: 500, headers: { 'Content-Type': 'application/json' } }
+        );
+      }
+    }
+
+    // 6. Insert report record metadata row into the Supabase "reports" table
     const { data: reportRow, error: dbError } = await supabaseAdmin
       .from('reports')
       .insert({

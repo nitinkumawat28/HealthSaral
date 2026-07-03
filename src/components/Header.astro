@@ -1,51 +1,72 @@
 ---
+const pathname = new URL(Astro.request.url).pathname;
+const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash for matching consistency
 ---
 
-<header class="sticky top-0 z-50 w-full border-b border-hairline bg-canvas/80 backdrop-blur-md">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-    <!-- Logo -->
-    <a href="/" class="flex items-center gap-2.5 focus-visible:ring-2 focus-visible:ring-primary rounded group" aria-label="HealthSaral Home">
+<div class="sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 py-4 pointer-events-none">
+  <header class="max-w-6xl mx-auto h-14 flex items-center justify-between border border-hairline bg-canvas/75 dark:bg-canvas-soft/75 backdrop-blur-xl rounded-full shadow-md-stacked px-4 sm:px-6 pointer-events-auto transition-all duration-300 hover:border-primary/20">
+    <!-- Logo & Active Status -->
+    <a href="/" class="flex items-center gap-2 sm:gap-2.5 focus-visible:ring-2 focus-visible:ring-primary rounded-full group" aria-label="HealthSaral Home">
       <!-- Custom SVG Medical-Leaf Logo -->
-      <svg class="w-7 h-7 shrink-0 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg class="w-6 h-6 sm:w-6.5 sm:h-6.5 shrink-0 transition-transform duration-300 group-hover:scale-105" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="currentColor" fill="currentColor" class="text-primary/10 dark:text-primary/20 fill-primary/5 dark:fill-primary/8" stroke-width="1.5"/>
         <path d="M12 4.5C12 4.5 7 9 7 13.5C7 18 12 19.5 12 19.5M12 4.5C12 4.5 17 9 17 13.5C17 18 12 19.5 12 19.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"/>
         <path d="M7.5 13.5H9.5L11 9L13 17L14.5 13.5H16.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="text-accent"/>
       </svg>
-      <span class="font-display text-2xl font-bold tracking-tight text-primary flex items-center">
-        HealthSaral<span class="text-accent ml-0.5 font-sans leading-none">&bull;</span>
+      <span class="font-display text-base sm:text-lg font-bold tracking-tight text-primary flex items-center">
+        HealthSaral
       </span>
     </a>
 
     <!-- Desktop Nav Links -->
-    <nav class="hidden md:flex items-center gap-1.5" aria-label="Main Navigation">
-      <a href="/#how-it-works" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+    <nav class="hidden md:flex items-center gap-1" aria-label="Main Navigation">
+      <a 
+        href="/#how-it-works" 
+        class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+      >
         How it works
       </a>
-      <a href="/#sample-preview" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+      <a 
+        href="/#sample-preview" 
+        class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+      >
         Sample output
       </a>
-      <a href="/#why-saral" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+      <a 
+        href="/#why-saral" 
+        class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+      >
         Why HealthSaral
       </a>
-      <a href="/#pricing" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+      <a 
+        href="/#pricing" 
+        class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
+      >
         Pricing
       </a>
-      <a href="/about" class="text-xs font-sans font-semibold text-muted hover:text-primary hover:bg-primary/5 rounded-full px-3.5 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none">
+      <a 
+        href="/about" 
+        class={`text-xs font-sans font-semibold rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
+          currentPath === '/about' 
+            ? 'bg-primary/5 text-primary border border-hairline/60' 
+            : 'text-muted hover:text-primary hover:bg-primary/5'
+        }`}
+      >
         About Us
       </a>
     </nav>
 
     <!-- Nav CTAs -->
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-2 sm:gap-3">
       <!-- Dark Mode Toggle Button -->
       <button
         id="theme-toggle"
         type="button"
-        class="p-2 rounded-full text-primary hover:bg-primary/5 hover:rotate-12 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer"
+        class="p-1.5 sm:p-2 rounded-full text-primary hover:bg-primary/5 hover:rotate-12 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer"
         aria-label="Toggle dark mode"
       >
         <!-- Sun Icon (visible in dark mode) -->
-        <svg id="theme-toggle-sun" class="w-4 h-4 hidden dark:block animate-spin-slow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+        <svg id="theme-toggle-sun" class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.978 4.978l1.59 1.59m10.862 10.862 1.59 1.59M3 12h2.25m13.5 0H21M4.978 19.022l1.59-1.59m10.862-10.862 1.59-1.59M12 7.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9Z" />
         </svg>
         <!-- Moon Icon (visible in light mode) -->
@@ -54,12 +75,20 @@
         </svg>
       </button>
 
-      <a href="/login" class="text-xs font-sans font-semibold text-primary hover:text-primary/95 hover:bg-primary/5 border border-transparent hover:border-hairline rounded-full px-4 py-2 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary rounded px-3 py-1.5">
+      <a 
+        href="/login" 
+        class={`text-xs font-sans font-semibold rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
+          currentPath === '/login' 
+            ? 'bg-primary/5 text-primary border border-hairline/60' 
+            : 'text-muted hover:text-primary hover:bg-primary/5 border border-transparent'
+        }`}
+      >
         Sign In
       </a>
+      
       <a 
         href="/#upload-section" 
-        class="hidden sm:block px-4 py-2 bg-accent hover:bg-accent/90 hover:scale-[1.03] active:scale-[0.97] text-white font-sans font-semibold text-xs rounded-full shadow-sm transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+        class="hidden sm:inline-flex items-center justify-center px-4 py-2 bg-accent hover:bg-accent/90 hover:scale-[1.03] active:scale-[0.97] text-white font-sans font-semibold text-xs rounded-full shadow-sm transition-all duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent pointer-events-auto"
       >
         Upload Report
       </a>
@@ -68,7 +97,7 @@
       <button
         id="mobile-menu-toggle"
         type="button"
-        class="p-2 rounded-md text-primary hover:bg-primary/5 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer md:hidden"
+        class="p-1.5 rounded-md text-primary hover:bg-primary/5 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none cursor-pointer md:hidden shrink-0"
         aria-label="Open main menu"
         aria-expanded="false"
       >
@@ -80,12 +109,12 @@
         </svg>
       </button>
     </div>
-  </div>
+  </header>
 
   <!-- Mobile Dropdown Menu -->
   <div 
     id="mobile-menu" 
-    class="hidden md:hidden absolute top-16 left-0 w-full bg-canvas/95 backdrop-blur-md border-b border-hairline py-6 px-6 flex flex-col gap-5 shadow-lg z-40 transition-all duration-300"
+    class="hidden md:hidden absolute top-20 left-4 right-4 bg-canvas/95 dark:bg-canvas-soft/95 backdrop-blur-xl border border-hairline py-6 px-6 flex flex-col gap-5 shadow-lg rounded-2xl z-40 transition-all duration-300 pointer-events-auto"
   >
     <nav class="flex flex-col gap-4">
       <a href="/#how-it-works" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">How it works</a>
@@ -99,7 +128,7 @@
       <a href="/#upload-section" class="mobile-nav-link text-center py-2.5 bg-accent hover:bg-accent/90 text-white font-sans font-medium text-xs rounded-full shadow-sm transition-all">Upload Report</a>
     </div>
   </div>
-</header>
+</div>
 
 <script>
   // Theme Toggle Logic
