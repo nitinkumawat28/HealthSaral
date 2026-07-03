@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import UploadWidget from '../components/UploadWidget.jsx';
 ---
 
 <Layout title="Dashboard — HealthSaral" description="Your patient dashboard. View your medical reports in plain, actionable language.">
@@ -55,6 +56,11 @@ import Layout from '../layouts/Layout.astro';
             <span id="user-email-body" class="col-span-2 font-mono font-medium"></span>
           </div>
         </div>
+      </div>
+
+      <!-- Upload widget container -->
+      <div class="mt-8">
+        <UploadWidget client:load />
       </div>
     </div>
 
