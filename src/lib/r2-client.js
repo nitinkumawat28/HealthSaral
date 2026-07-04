@@ -29,27 +29,50 @@ export const r2Client = new S3Client({
 });
 
 /**
- * Uploads a file buffer to Cloudflare R2.
+ * Uploads a file buffer to Cloudflare R2, with a local filesystem fallback on failure.
  * Key path template: reports/{userId}/{timestamp}-{fileName}
  * 
  * @param {Buffer | Uint8Array} fileBuffer - The file content buffer.
  * @param {string} fileName - Original file name.
  * @param {string} contentType - MIME type of the file.
  * @param {string} userId - User's ID for folder categorization.
- * @returns {Promise<string>} - Resolves to the uploaded object's key.
+ * @returns {Promise<string>} - Resolves to the uploaded object's key or a local:// file path.
  */
 export async function uploadFileToR2(fileBuffer, fileName, contentType, userId) {
   const timestamp = Date.now();
   const cleanFileName = fileName.replace(/\s+/g, '-');
   const objectKey = `reports/${userId}/${timestamp}-${cleanFileName}`;
 
-  const command = new PutObjectCommand({
-    Bucket: bucketName,
-    Key: objectKey,
-    Body: fileBuffer,
-    ContentType: contentType,
-  });
+  try {
+    const command = new PutObjectCommand({
+      Bucket: bucketName,
+      Key: objectKey,
+      Body: fileBuffer,
+      ContentType: contentType,
+    });
 
-  await r2Client.send(command);
-  return objectKey;
+    await r2Client.send(command);
+    return objectKey;
+  } catch (err) {
+    console.warn('R2 upload failed, writing file to local fallback storage instead:', err.message);
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      const uploadsDir = path.join(process.cwd(), 'src/uploads');
+      
+      // Ensure the local uploads directory exists
+      await fs.mkdir(uploadsDir, { recursive: true });
+      
+      const localFileName = `${timestamp}-${cleanFileName}`;
+      const localPath = path.join(uploadsDir, localFileName);
+      
+      await fs.writeFile(localPath, fileBuffer);
+      
+      // Return a special local identifier
+      return `local://${localFileName}`;
+    } catch (fsErr) {
+      console.error('Failed to write local fallback file:', fsErr);
+      throw err; // throw original R2 upload error if fallback also fails
+    }
+  }
 }

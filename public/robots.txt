@@ -1,0 +1,20 @@
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+
+# Allow crawling of public pages
+Allow: /$
+Allow: /about
+Allow: /contact
+Allow: /login
+Allow: /privacy
+Allow: /terms
+Allow: /faq
+
+# Disallow crawling of secure dashboard, dynamic medical reports, and internal API routes
+Disallow: /dashboard
+Disallow: /report/
+Disallow: /api/
+
+# Host and Sitemap details for search engines
+Host: healthsaral.com
+Sitemap: https://healthsaral.com/sitemap.xml

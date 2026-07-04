@@ -87,6 +87,29 @@ import Layout from '../layouts/Layout.astro';
         </button>
       </form>
 
+      <!-- Step 3: Already Signed In Profile Panel -->
+      <div id="profile-panel" class="hidden text-center space-y-6">
+        <div class="p-4 bg-[#F3F6F4] border border-[#DDE4E0] rounded-lg">
+          <p class="text-xs font-semibold uppercase tracking-wider text-gray-500 mb-1">Signed In As</p>
+          <p id="user-email-display" class="font-mono text-sm font-semibold text-[#16262A] break-all"></p>
+        </div>
+
+        <button
+          type="button"
+          id="logout-btn"
+          class="w-full py-3 px-4 bg-red-50 hover:bg-red-100 border border-red-200 text-red-700 font-semibold text-sm rounded-lg shadow-sm transition-all cursor-pointer focus:outline-none focus:ring-2 focus:ring-red-200"
+        >
+          Sign Out / Logout
+        </button>
+
+        <a
+          href="/"
+          class="block text-center text-xs font-semibold text-[#D65B3E] hover:underline"
+        >
+          Back to Home Page
+        </a>
+      </div>
+
     </div>
   </main>
 </Layout>
@@ -95,11 +118,40 @@ import Layout from '../layouts/Layout.astro';
 <script>
   import { supabase } from '../lib/supabase.js';
 
-  // Redirect to dashboard if the user is already logged in
+  // If the user is already logged in, show the profile management panel
+  // instead of the email input form, enabling them to Sign Out.
   async function checkSessionOnLoad() {
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
-      window.location.href = '/dashboard';
+      // Hide login instruction text & email form
+      const introDesc = document.querySelector('main p.text-sm');
+      if (introDesc) introDesc.classList.add('hidden');
+      
+      const headerTitle = document.querySelector('main h1');
+      if (headerTitle) headerTitle.textContent = 'Account Profile';
+
+      if (emailForm) emailForm.classList.add('hidden');
+      if (otpForm) otpForm.classList.add('hidden');
+
+      // Show profile panel and populate user email
+      const profilePanel = document.getElementById('profile-panel');
+      const emailDisplay = document.getElementById('user-email-display');
+      
+      if (profilePanel) profilePanel.classList.remove('hidden');
+      if (emailDisplay && session.user) {
+        emailDisplay.textContent = session.user.email || '';
+      }
+
+      // Bind Logout Button click action
+      const logoutBtn = document.getElementById('logout-btn');
+      logoutBtn?.addEventListener('click', async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+          console.error('Error signing out:', error.message);
+        }
+        // Force refresh to clear storage states and reset layout
+        window.location.href = '/login';
+      });
     }
   }
   checkSessionOnLoad();
@@ -137,7 +189,7 @@ import Layout from '../layouts/Layout.astro';
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
-        emailRedirectTo: window.location.origin + '/dashboard',
+        emailRedirectTo: window.location.origin + '/',
       }
     });
 
@@ -192,8 +244,8 @@ import Layout from '../layouts/Layout.astro';
       verifyOtpBtn.disabled = false;
       verifyOtpBtn.textContent = 'Verify & Sign In';
     } else {
-      // Success! Redirect to the authenticated dashboard
-      window.location.href = '/dashboard';
+      // Success! Redirect to the authenticated homepage
+      window.location.href = '/';
     }
   });
 

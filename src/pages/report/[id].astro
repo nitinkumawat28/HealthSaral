@@ -1,0 +1,37 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import ReportResult from '../../components/ReportResult.jsx';
+
+// Disable static pre-rendering so that dynamic routes can render on-demand in SSR mode
+export const prerender = false;
+
+// Retrieve the dynamic reportId parameter from the request URL path (e.g. /report/123 -> id = "123")
+const { id } = Astro.params;
+---
+
+<Layout 
+  title="Biomarker Analysis Results | HealthSaral" 
+  description="View your AI-extracted biomarker findings and educational health suggestions."
+>
+  <!-- Render the global responsive navigation header -->
+  <Header />
+
+  <!-- Main section using standard styling: bg-canvas-soft text-ink -->
+  <main class="flex-grow bg-canvas-soft text-ink">
+    <div class="max-w-5xl mx-auto py-10 px-4 sm:px-6 lg:px-8">
+      
+      {/* 
+        Mount the React island component on the client. 
+        We pass the dynamic reportId string down as a prop.
+        The client:load directive ensures the React logic is hydrated and executed immediately.
+      */}
+      <ReportResult client:load reportId={id} />
+      
+    </div>
+  </main>
+
+  <!-- Render the global footer -->
+  <Footer />
+</Layout>

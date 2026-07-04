@@ -61,6 +61,27 @@ export const POST: APIRoute = async ({ request }) => {
     const contentType = file.type;
     const userId = user.id;
 
+    // Guard: Limit user to a maximum of 5 reports per account (Gmail ID)
+    const { count: totalReportsCount, error: countError } = await supabaseAdmin
+      .from('reports')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', userId);
+
+    if (countError) {
+      console.error('Failed to verify user report limit:', countError);
+      return new Response(
+        JSON.stringify({ message: 'Server error. Failed to verify report analysis limits.' }),
+        { status: 500, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
+    if (totalReportsCount !== null && totalReportsCount >= 5) {
+      return new Response(
+        JSON.stringify({ message: 'Limit exceeded. You cannot analyze more than 5 reports per account.' }),
+        { status: 403, headers: { 'Content-Type': 'application/json' } }
+      );
+    }
+
     // 4. Upload file buffer to Cloudflare R2 private bucket via S3 client
     const objectKey = await uploadFileToR2(fileBuffer, fileName, contentType, userId);
 
