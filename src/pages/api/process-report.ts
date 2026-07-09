@@ -169,20 +169,31 @@ export const POST: APIRoute = async ({ request }) => {
       }
     } else {
       try {
-        const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
-        const getCommand = new GetObjectCommand({
-          Bucket: bucketName,
-          Key: report.file_url,
-        });
+        let fileBytes;
+        if (env?.R2_BUCKET) {
+          console.log('Using native Cloudflare R2 bucket binding for download...');
+          const r2Object = await env.R2_BUCKET.get(report.file_url);
+          if (!r2Object) {
+            throw new Error(`Object not found in R2 bucket: ${report.file_url}`);
+          }
+          fileBytes = await r2Object.arrayBuffer();
+          mimeType = r2Object.httpMetadata?.contentType || 'application/pdf';
+        } else {
+          const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
+          const getCommand = new GetObjectCommand({
+            Bucket: bucketName,
+            Key: report.file_url,
+          });
 
-        const s3Response = await r2Client.send(getCommand);
-        if (!s3Response.Body) {
-          throw new Error('S3 GetObject response body is empty.');
+          const s3Response = await r2Client.send(getCommand);
+          if (!s3Response.Body) {
+            throw new Error('S3 GetObject response body is empty.');
+          }
+
+          fileBytes = await s3Response.Body.transformToByteArray();
+          mimeType = s3Response.ContentType || 'application/pdf';
         }
-
-        const fileBytes = await s3Response.Body.transformToByteArray();
         fileBuffer = Buffer.from(fileBytes);
-        mimeType = s3Response.ContentType || 'application/pdf';
 
       } catch (r2Error: any) {
         console.error('Failed to fetch file from Cloudflare R2:', r2Error);

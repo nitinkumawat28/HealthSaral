@@ -20,5 +20,11 @@
 		"PUBLIC_SUPABASE_ANON_KEY": "sb_publishable_EP7_0vXFGOtevhAhM7BvOQ__lpCnGJS",
 		"R2_ACCOUNT_ID": "b3de88b1977a818386eddac867e561fd",
 		"R2_BUCKET_NAME": "healthsaral-reports"
-	}
+	},
+	"r2_buckets": [
+		{
+			"binding": "R2_BUCKET",
+			"bucket_name": "healthsaral-reports"
+		}
+	]
 }

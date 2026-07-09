@@ -50,6 +50,21 @@ export async function uploadFileToR2(fileBuffer, fileName, contentType, userId, 
   const cleanFileName = fileName.replace(/\s+/g, '-');
   const objectKey = `reports/${userId}/${timestamp}-${cleanFileName}`;
 
+  // 1. Try to use native Cloudflare Workers R2 binding if it is defined in env
+  if (env?.R2_BUCKET) {
+    try {
+      console.log('Using native Cloudflare R2 bucket binding for upload...');
+      await env.R2_BUCKET.put(objectKey, fileBuffer, {
+        httpMetadata: {
+          contentType: contentType
+        }
+      });
+      return objectKey;
+    } catch (r2BindErr) {
+      console.warn('Native R2 binding upload failed, falling back to S3 Client:', r2BindErr.message);
+    }
+  }
+
   const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
 
   if (!bucketName) {

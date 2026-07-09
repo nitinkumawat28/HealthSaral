@@ -140,10 +140,14 @@ export const POST: APIRoute = async ({ request }) => {
       { status: 200, headers: { 'Content-Type': 'application/json' } }
     );
 
-  } catch (err) {
+  } catch (err: any) {
     console.error('Unhandled upload API error:', err);
     return new Response(
-      JSON.stringify({ message: 'Server error. An unexpected error occurred during processing.' }),
+      JSON.stringify({ 
+        message: 'Server error. An unexpected error occurred during processing.',
+        error: err?.message,
+        stack: err?.stack
+      }),
       { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
