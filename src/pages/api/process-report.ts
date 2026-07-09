@@ -13,7 +13,6 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request }) => {
   try {
     const supabaseAdmin = getSupabaseAdmin(env);
-    const r2Client = getR2Client(env);
     // Step 1: Verify user authentication session using JWT Bearer token from header.
     // We retrieve the token from the "Authorization" header just like in upload-report.ts.
     const authHeader = request.headers.get('Authorization');
@@ -167,6 +166,7 @@ export const POST: APIRoute = async ({ request }) => {
           fileBytes = await r2Object.arrayBuffer();
           mimeType = r2Object.httpMetadata?.contentType || 'application/pdf';
         } else {
+          const r2Client = getR2Client(env);
           const bucketName = env?.R2_BUCKET_NAME || import.meta.env?.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
           const getCommand = new GetObjectCommand({
             Bucket: bucketName,
