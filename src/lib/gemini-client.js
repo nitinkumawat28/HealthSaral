@@ -62,8 +62,8 @@ export async function analyzeReport(fileBuffer, mimeType, env) {
       ],
       // We configure model constraints within the config property.
       config: {
-        // System instruction forces the persona, guards against medical diagnosis, and mandates JSON output format.
-        systemInstruction: "You are a health report interpreter. You explain lab report markers in simple, plain language. You NEVER diagnose. You always suggest consulting a doctor for anything concerning. Respond ONLY in valid JSON, no other text, no markdown code fences.",
+        // System instruction forces the persona, guards against medical diagnosis, mandates JSON format, and enforces strict conciseness.
+        systemInstruction: "You are a health report interpreter. You explain lab report markers in simple, plain language. Keep all explanations extremely concise (maximum 1-2 sentences per marker). You NEVER diagnose. You always suggest consulting a doctor for anything concerning. Respond ONLY in valid JSON, no other text, no markdown code fences.",
         // Force the output to be raw JSON instead of plain markdown text.
         responseMimeType: "application/json",
         // Lower temperature makes token selection more deterministic, speeding up generation
@@ -85,14 +85,14 @@ export async function analyzeReport(fileBuffer, mimeType, env) {
                   name: { type: "STRING", description: "Biomarker name (e.g. TSH, Hemoglobin)" },
                   value: { type: "STRING", description: "Value with units (e.g. 6.82 uIU/mL)" },
                   status: { type: "STRING", description: "Status (e.g. Normal, High, Low, Critical)" },
-                  explanation: { type: "STRING", description: "Plain language layperson explanation of the marker and value" }
+                  explanation: { type: "STRING", description: "Extremely concise (max 1-2 sentences) plain language explanation of the marker and value" }
                 },
                 required: ["name", "value", "status", "explanation"]
               }
             },
             summary: { 
               type: "STRING", 
-              description: "An empathetic, reassuring layperson summary of the overall report findings" 
+              description: "A very concise (max 2-3 sentences) empathetic, reassuring layperson summary of the overall report findings" 
             },
             action_plan: {
               type: "ARRAY",
