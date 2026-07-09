@@ -1,6 +1,7 @@
 // Import the Google Gen AI client library.
 // We use the new, unified "@google/genai" package rather than the legacy "@google/generative-ai" package.
 import { GoogleGenAI } from '@google/genai';
+import { Buffer } from 'node:buffer';
 
 // Cache the GoogleGenAI client instance to reuse HTTP/TCP connections across warm worker requests
 let cachedAi = null;
