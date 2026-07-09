@@ -130,14 +130,14 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // Step 6: Fetch the binary file payload from Cloudflare R2 bucket (or local filesystem fallback).
-    let fileBuffer: Buffer;
-    let mimeType: string;
-    
-    const isLocal = report.file_url.startsWith('local://');
-    
-    if (isLocal) {
-      try {
+    // Step 6: Fetch the file, send to Gemini, and update database. All wrapped in a try/catch to ensure database status is marked as failed on error.
+    try {
+      let fileBuffer: Buffer;
+      let mimeType: string;
+      
+      const isLocal = report.file_url.startsWith('local://');
+      
+      if (isLocal) {
         const localFileName = report.file_url.substring(8);
         const fs = await import('fs/promises');
         const path = await import('path');
@@ -156,20 +156,7 @@ export const POST: APIRoute = async ({ request }) => {
         } else {
           mimeType = 'application/octet-stream';
         }
-      } catch (localError: any) {
-        console.error('Failed to read file from local fallback storage:', localError);
-        await supabaseAdmin
-          .from('reports')
-          .update({ status: 'failed' })
-          .eq('id', reportId);
-
-        return new Response(
-          JSON.stringify({ message: 'Failed to retrieve the report file from local storage.' }),
-          { status: 500, headers: { 'Content-Type': 'application/json' } }
-        );
-      }
-    } else {
-      try {
+      } else {
         let fileBytes;
         if (env?.R2_BUCKET) {
           console.log('Using native Cloudflare R2 bucket binding for download...');
@@ -180,7 +167,7 @@ export const POST: APIRoute = async ({ request }) => {
           fileBytes = await r2Object.arrayBuffer();
           mimeType = r2Object.httpMetadata?.contentType || 'application/pdf';
         } else {
-          const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
+          const bucketName = env?.R2_BUCKET_NAME || import.meta.env?.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
           const getCommand = new GetObjectCommand({
             Bucket: bucketName,
             Key: report.file_url,
@@ -195,67 +182,55 @@ export const POST: APIRoute = async ({ request }) => {
           mimeType = s3Response.ContentType || 'application/pdf';
         }
         fileBuffer = Buffer.from(fileBytes);
-
-      } catch (r2Error: any) {
-        console.error('Failed to fetch file from Cloudflare R2:', r2Error);
-        
-        // Update database status to "failed"
-        await supabaseAdmin
-          .from('reports')
-          .update({ status: 'failed' })
-          .eq('id', reportId);
-
-        return new Response(
-          JSON.stringify({ message: 'Failed to retrieve the uploaded report file for analysis.' }),
-          { status: 500, headers: { 'Content-Type': 'application/json' } }
-        );
       }
-    }
 
-    // Step 7: Send the file to the Google Gemini API client for medical interpretation.
-    const aiResponse = await analyzeReport(fileBuffer, mimeType, env);
+      // Step 7: Send the file to the Google Gemini API client for medical interpretation.
+      const aiResponse = await analyzeReport(fileBuffer, mimeType, env);
 
-    if (!aiResponse.success) {
-      console.error('Gemini Analysis Failed:', aiResponse.error);
+      if (!aiResponse.success) {
+        throw new Error(aiResponse.error || 'Gemini Analysis returned unsuccessful.');
+      }
 
-      // Step 8a: Handle failure — update database row status to "failed"
+      // Step 8: Handle success — save parsed AI results and set status to "done"
+      const { error: updateSuccessError } = await supabaseAdmin
+        .from('reports')
+        .update({
+          status: 'done',
+          ai_result: aiResponse.data // Store parsed JSON object directly in JSONB column
+        })
+        .eq('id', reportId);
+
+      if (updateSuccessError) {
+        throw new Error(`Failed to update success state in database: ${updateSuccessError.message}`);
+      }
+
+      // Return the completed analysis response to the client
+      return new Response(
+        JSON.stringify({
+          message: 'Report processed successfully.',
+          status: 'done',
+          result: aiResponse.data
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } }
+      );
+
+    } catch (procError: any) {
+      console.error('Error during report processing pipeline:', procError);
+      
+      // Update database status to "failed" so the UI polling detects it and shows retry options
       await supabaseAdmin
         .from('reports')
         .update({ status: 'failed' })
         .eq('id', reportId);
 
       return new Response(
-        JSON.stringify({ message: 'AI processing failed. Could not interpret the health report.' }),
+        JSON.stringify({ 
+          message: 'Server error. Report processing pipeline failed.', 
+          error: procError.message 
+        }),
         { status: 500, headers: { 'Content-Type': 'application/json' } }
       );
     }
-
-    // Step 8b: Handle success — save parsed AI results and set status to "done"
-    const { error: updateSuccessError } = await supabaseAdmin
-      .from('reports')
-      .update({
-        status: 'done',
-        ai_result: aiResponse.data // Store parsed JSON object directly in JSONB column
-      })
-      .eq('id', reportId);
-
-    if (updateSuccessError) {
-      console.error('Failed to update success state in database:', updateSuccessError);
-      return new Response(
-        JSON.stringify({ message: 'AI analysis completed, but failed to save the results.' }),
-        { status: 500, headers: { 'Content-Type': 'application/json' } }
-      );
-    }
-
-    // Return the completed analysis response to the client
-    return new Response(
-      JSON.stringify({
-        message: 'Report processed successfully.',
-        status: 'done',
-        result: aiResponse.data
-      }),
-      { status: 200, headers: { 'Content-Type': 'application/json' } }
-    );
 
   } catch (error: any) {
     // Log unexpected errors securely without leaking internals to public clients

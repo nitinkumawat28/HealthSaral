@@ -8,9 +8,9 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
 // Create the R2 client dynamically with runtime environment fallback support
 export function getR2Client(env) {
-  const accountId = env?.R2_ACCOUNT_ID || import.meta.env.R2_ACCOUNT_ID || (typeof process !== 'undefined' ? process.env.R2_ACCOUNT_ID : undefined);
-  const accessKeyId = env?.R2_ACCESS_KEY_ID || import.meta.env.R2_ACCESS_KEY_ID || (typeof process !== 'undefined' ? process.env.R2_ACCESS_KEY_ID : undefined);
-  const secretAccessKey = env?.R2_SECRET_ACCESS_KEY || import.meta.env.R2_SECRET_ACCESS_KEY || (typeof process !== 'undefined' ? process.env.R2_SECRET_ACCESS_KEY : undefined);
+  const accountId = env?.R2_ACCOUNT_ID || import.meta.env?.R2_ACCOUNT_ID || (typeof process !== 'undefined' ? process.env.R2_ACCOUNT_ID : undefined);
+  const accessKeyId = env?.R2_ACCESS_KEY_ID || import.meta.env?.R2_ACCESS_KEY_ID || (typeof process !== 'undefined' ? process.env.R2_ACCESS_KEY_ID : undefined);
+  const secretAccessKey = env?.R2_SECRET_ACCESS_KEY || import.meta.env?.R2_SECRET_ACCESS_KEY || (typeof process !== 'undefined' ? process.env.R2_SECRET_ACCESS_KEY : undefined);
 
   if (!accountId || !accessKeyId || !secretAccessKey) {
     throw new Error('Missing Cloudflare R2 credentials (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY).');
@@ -65,7 +65,7 @@ export async function uploadFileToR2(fileBuffer, fileName, contentType, userId, 
     }
   }
 
-  const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
+  const bucketName = env?.R2_BUCKET_NAME || import.meta.env?.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
 
   if (!bucketName) {
     throw new Error('R2_BUCKET_NAME is not defined in environment variables.');

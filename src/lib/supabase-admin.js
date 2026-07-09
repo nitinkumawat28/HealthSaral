@@ -1,8 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL;
 // SERVER-ONLY variable
-const supabaseServiceRoleKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // WARNING & SECURITY AUDIT NOTE: 
 // The SUPABASE_SERVICE_ROLE_KEY has full admin privileges and bypasses Row Level Security (RLS).
@@ -13,8 +11,8 @@ const supabaseServiceRoleKey = import.meta.env.SUPABASE_SERVICE_ROLE_KEY;
 
 // Create the admin client dynamically with runtime environment fallback support
 export function getSupabaseAdmin(env) {
-  const supabaseUrl = env?.PUBLIC_SUPABASE_URL || import.meta.env.PUBLIC_SUPABASE_URL || (typeof process !== 'undefined' ? process.env.PUBLIC_SUPABASE_URL : undefined);
-  const supabaseServiceRoleKey = env?.SUPABASE_SERVICE_ROLE_KEY || import.meta.env.SUPABASE_SERVICE_ROLE_KEY || (typeof process !== 'undefined' ? process.env.SUPABASE_SERVICE_ROLE_KEY : undefined);
+  const supabaseUrl = env?.PUBLIC_SUPABASE_URL || import.meta.env?.PUBLIC_SUPABASE_URL || (typeof process !== 'undefined' ? process.env.PUBLIC_SUPABASE_URL : undefined);
+  const supabaseServiceRoleKey = env?.SUPABASE_SERVICE_ROLE_KEY || import.meta.env?.SUPABASE_SERVICE_ROLE_KEY || (typeof process !== 'undefined' ? process.env.SUPABASE_SERVICE_ROLE_KEY : undefined);
 
   if (!supabaseUrl || !supabaseServiceRoleKey) {
     throw new Error(
