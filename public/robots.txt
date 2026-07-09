@@ -16,5 +16,5 @@ Disallow: /report/
 Disallow: /api/
 
 # Host and Sitemap details for search engines
-Host: healthsaral.com
-Sitemap: https://healthsaral.com/sitemap.xml
+Host: healthsaral.in
+Sitemap: https://healthsaral.in/sitemap.xml

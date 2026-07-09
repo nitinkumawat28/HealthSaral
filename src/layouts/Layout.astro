@@ -11,7 +11,7 @@ const {
 	description = "Free AI-powered lab report analyzer. Upload any blood test or medical report and get a clear, personalized explanation in simple language — no jargon, no guesswork."
 } = Astro.props;
 
-const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.com').href;
+const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 ---
 
 <!doctype html>
@@ -48,7 +48,7 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.com').href
 		<meta property="og:url" content={canonicalUrl} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:image" content={new URL('/og-image.png', 'https://healthsaral.com').href} />
+		<meta property="og:image" content={new URL('/og-image.png', 'https://healthsaral.in').href} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
 		<meta property="og:image:type" content="image/png" />
@@ -59,7 +59,7 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.com').href
 		<meta name="twitter:url" content={canonicalUrl} />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
-		<meta name="twitter:image" content={new URL('/og-image.png', 'https://healthsaral.com').href} />
+		<meta name="twitter:image" content={new URL('/og-image.png', 'https://healthsaral.in').href} />
 		
 		<!-- Google Fonts: Fraunces (Headlines), Inter (Body), JetBrains Mono (Clinical labels) -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />

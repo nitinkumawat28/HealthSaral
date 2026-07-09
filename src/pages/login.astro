@@ -196,7 +196,15 @@ import Layout from '../layouts/Layout.astro';
     if (error) {
       // Display error message if the API call failed
       if (errorMsg) {
-        errorMsg.textContent = error.message;
+        let msg = error.message;
+        if (msg === '{}' || !msg) {
+          if (error.status === 500) {
+            msg = 'Supabase was unable to send the login email. Please configure your custom SMTP settings in the Supabase Dashboard, or check if rate limits were exceeded.';
+          } else {
+            msg = 'Failed to request login code. Please try again.';
+          }
+        }
+        errorMsg.textContent = msg;
         errorMsg.classList.remove('hidden');
       }
       sendOtpBtn.disabled = false;
@@ -238,7 +246,11 @@ import Layout from '../layouts/Layout.astro';
     if (error) {
       // Display verification failure error
       if (errorMsg) {
-        errorMsg.textContent = error.message;
+        let msg = error.message;
+        if (msg === '{}' || !msg) {
+          msg = 'Invalid or expired verification code. Please request a new code.';
+        }
+        errorMsg.textContent = msg;
         errorMsg.classList.remove('hidden');
       }
       verifyOtpBtn.disabled = false;

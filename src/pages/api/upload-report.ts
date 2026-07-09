@@ -1,13 +1,16 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '../../lib/supabase';
-import { supabaseAdmin } from '../../lib/supabase-admin';
+import { getSupabaseAdmin } from '../../lib/supabase-admin';
 import { uploadFileToR2 } from '../../lib/r2-client';
 
 // Ensure this API route is rendered server-side on-demand (non-prerendered)
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    const env = locals.runtime?.env;
+    const supabaseAdmin = getSupabaseAdmin(env);
+
     // 1. Verify user authentication session using JWT Bearer token from header
     const authHeader = request.headers.get('Authorization');
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -83,7 +86,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // 4. Upload file buffer to Cloudflare R2 private bucket via S3 client
-    const objectKey = await uploadFileToR2(fileBuffer, fileName, contentType, userId);
+    const objectKey = await uploadFileToR2(fileBuffer, fileName, contentType, userId, env);
 
     // 5. Ensure user profile exists in profiles table before inserting report (due to foreign key constraint)
     const { data: profileExists, error: profileCheckError } = await supabaseAdmin

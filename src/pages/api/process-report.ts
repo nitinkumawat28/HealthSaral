@@ -1,15 +1,18 @@
 import type { APIRoute } from 'astro';
 import { supabase } from '../../lib/supabase';
-import { supabaseAdmin } from '../../lib/supabase-admin';
+import { getSupabaseAdmin } from '../../lib/supabase-admin';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
-import { r2Client } from '../../lib/r2-client';
+import { getR2Client } from '../../lib/r2-client';
 import { analyzeReport } from '../../lib/gemini-client';
 
 // Ensure this API route is rendered server-side on-demand (non-prerendered)
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, locals }) => {
   try {
+    const env = locals.runtime?.env;
+    const supabaseAdmin = getSupabaseAdmin(env);
+    const r2Client = getR2Client(env);
     // Step 1: Verify user authentication session using JWT Bearer token from header.
     // We retrieve the token from the "Authorization" header just like in upload-report.ts.
     const authHeader = request.headers.get('Authorization');
@@ -166,7 +169,7 @@ export const POST: APIRoute = async ({ request }) => {
       }
     } else {
       try {
-        const bucketName = import.meta.env.R2_BUCKET_NAME;
+        const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
         const getCommand = new GetObjectCommand({
           Bucket: bucketName,
           Key: report.file_url,
@@ -198,7 +201,7 @@ export const POST: APIRoute = async ({ request }) => {
     }
 
     // Step 7: Send the file to the Google Gemini API client for medical interpretation.
-    const aiResponse = await analyzeReport(fileBuffer, mimeType);
+    const aiResponse = await analyzeReport(fileBuffer, mimeType, env);
 
     if (!aiResponse.success) {
       console.error('Gemini Analysis Failed:', aiResponse.error);

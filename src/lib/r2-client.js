@@ -6,27 +6,33 @@ import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 // 2. This must only be run in server contexts (e.g. Astro endpoints / API routes, middleware, or server-rendered pages).
 // 3. Keep the R2 bucket private. Do not generate any public URL logic.
 
-const accountId = import.meta.env.R2_ACCOUNT_ID;
-const accessKeyId = import.meta.env.R2_ACCESS_KEY_ID;
-const secretAccessKey = import.meta.env.R2_SECRET_ACCESS_KEY;
-const bucketName = import.meta.env.R2_BUCKET_NAME;
+// Create the R2 client dynamically with runtime environment fallback support
+export function getR2Client(env) {
+  const accountId = env?.R2_ACCOUNT_ID || import.meta.env.R2_ACCOUNT_ID || (typeof process !== 'undefined' ? process.env.R2_ACCOUNT_ID : undefined);
+  const accessKeyId = env?.R2_ACCESS_KEY_ID || import.meta.env.R2_ACCESS_KEY_ID || (typeof process !== 'undefined' ? process.env.R2_ACCESS_KEY_ID : undefined);
+  const secretAccessKey = env?.R2_SECRET_ACCESS_KEY || import.meta.env.R2_SECRET_ACCESS_KEY || (typeof process !== 'undefined' ? process.env.R2_SECRET_ACCESS_KEY : undefined);
 
-if (!accountId || !accessKeyId || !secretAccessKey || !bucketName) {
-  throw new Error(
-    'Missing one or more Cloudflare R2 environment variables. ' +
-    'Please verify R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, and R2_BUCKET_NAME in your .env file.'
-  );
+  if (!accountId || !accessKeyId || !secretAccessKey) {
+    throw new Error('Missing Cloudflare R2 credentials (R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY).');
+  }
+
+  return new S3Client({
+    region: 'auto',
+    endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
+    credentials: {
+      accessKeyId,
+      secretAccessKey,
+    },
+  });
 }
 
-// Configure S3Client for Cloudflare R2 compatibility
-export const r2Client = new S3Client({
-  region: 'auto',
-  endpoint: `https://${accountId}.r2.cloudflarestorage.com`,
-  credentials: {
-    accessKeyId,
-    secretAccessKey,
-  },
-});
+// Export a static instance if env is available at load time, otherwise allow dynamic instantiation
+export let r2Client;
+try {
+  r2Client = getR2Client();
+} catch (e) {
+  // Silently ignore module-level errors during Cloudflare Workers import
+}
 
 /**
  * Uploads a file buffer to Cloudflare R2, with a local filesystem fallback on failure.
@@ -36,14 +42,22 @@ export const r2Client = new S3Client({
  * @param {string} fileName - Original file name.
  * @param {string} contentType - MIME type of the file.
  * @param {string} userId - User's ID for folder categorization.
+ * @param {any} [env] - Optional runtime environment bindings.
  * @returns {Promise<string>} - Resolves to the uploaded object's key or a local:// file path.
  */
-export async function uploadFileToR2(fileBuffer, fileName, contentType, userId) {
+export async function uploadFileToR2(fileBuffer, fileName, contentType, userId, env) {
   const timestamp = Date.now();
   const cleanFileName = fileName.replace(/\s+/g, '-');
   const objectKey = `reports/${userId}/${timestamp}-${cleanFileName}`;
 
+  const bucketName = env?.R2_BUCKET_NAME || import.meta.env.R2_BUCKET_NAME || (typeof process !== 'undefined' ? process.env.R2_BUCKET_NAME : undefined);
+
+  if (!bucketName) {
+    throw new Error('R2_BUCKET_NAME is not defined in environment variables.');
+  }
+
   try {
+    const client = getR2Client(env);
     const command = new PutObjectCommand({
       Bucket: bucketName,
       Key: objectKey,
@@ -51,7 +65,7 @@ export async function uploadFileToR2(fileBuffer, fileName, contentType, userId) 
       ContentType: contentType,
     });
 
-    await r2Client.send(command);
+    await client.send(command);
     return objectKey;
   } catch (err) {
     console.warn('R2 upload failed, writing file to local fallback storage instead:', err.message);

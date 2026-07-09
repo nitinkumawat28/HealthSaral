@@ -2,28 +2,22 @@
 // We use the new, unified "@google/genai" package rather than the legacy "@google/generative-ai" package.
 import { GoogleGenAI } from '@google/genai';
 
-// Retrieve the Google Gemini API key from environment variables.
-// In Node.js server environments, it is usually found under process.env.GEMINI_API_KEY.
-// In Astro/Vite contexts, we can also check import.meta.env.GEMINI_API_KEY as a fallback.
-const apiKey = process.env.GEMINI_API_KEY || (typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.GEMINI_API_KEY : undefined);
-
-if (!apiKey) {
-  console.warn(
-    'Warning: GEMINI_API_KEY is not defined. Please add it to your environment variables or .env file.'
-  );
-}
-
-// Initialize the GoogleGenAI client with the retrieved API key.
-const ai = new GoogleGenAI({ apiKey });
-
 /**
  * Analyzes a health report file (PDF, JPG, PNG) using Google Gemini AI.
  * 
  * @param {Buffer} fileBuffer - The raw binary data of the uploaded file.
  * @param {string} mimeType - The MIME content type of the file (e.g., 'application/pdf', 'image/png').
+ * @param {any} [env] - Optional runtime environment bindings containing the GEMINI_API_KEY.
  * @returns {Promise<{ success: boolean; data?: any; error?: string }>} - A promise resolving to the parsed analysis or an error.
  */
-export async function analyzeReport(fileBuffer, mimeType) {
+export async function analyzeReport(fileBuffer, mimeType, env) {
+  const apiKey = env?.GEMINI_API_KEY || process.env.GEMINI_API_KEY || (typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.GEMINI_API_KEY : undefined);
+  
+  if (!apiKey) {
+    throw new Error('GEMINI_API_KEY environment variable is not defined.');
+  }
+
+  const ai = new GoogleGenAI({ apiKey });
   try {
     // Step 1: Validate input arguments
     if (!fileBuffer || !Buffer.isBuffer(fileBuffer)) {
