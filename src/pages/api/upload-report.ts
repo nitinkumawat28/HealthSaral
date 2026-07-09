@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 import { supabase } from '../../lib/supabase';
 import { getSupabaseAdmin } from '../../lib/supabase-admin';
 import { uploadFileToR2 } from '../../lib/r2-client';
@@ -6,9 +7,8 @@ import { uploadFileToR2 } from '../../lib/r2-client';
 // Ensure this API route is rendered server-side on-demand (non-prerendered)
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
-    const env = locals.runtime?.env;
     const supabaseAdmin = getSupabaseAdmin(env);
 
     // 1. Verify user authentication session using JWT Bearer token from header

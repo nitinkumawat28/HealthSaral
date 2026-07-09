@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { env } from 'cloudflare:workers';
 import { supabase } from '../../lib/supabase';
 import { getSupabaseAdmin } from '../../lib/supabase-admin';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
@@ -8,9 +9,8 @@ import { analyzeReport } from '../../lib/gemini-client';
 // Ensure this API route is rendered server-side on-demand (non-prerendered)
 export const prerender = false;
 
-export const POST: APIRoute = async ({ request, locals }) => {
+export const POST: APIRoute = async ({ request }) => {
   try {
-    const env = locals.runtime?.env;
     const supabaseAdmin = getSupabaseAdmin(env);
     const r2Client = getR2Client(env);
     // Step 1: Verify user authentication session using JWT Bearer token from header.
