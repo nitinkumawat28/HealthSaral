@@ -2,6 +2,19 @@
 // We use the new, unified "@google/genai" package rather than the legacy "@google/generative-ai" package.
 import { GoogleGenAI } from '@google/genai';
 
+// Cache the GoogleGenAI client instance to reuse HTTP/TCP connections across warm worker requests
+let cachedAi = null;
+let cachedApiKey = null;
+
+function getGeminiClient(apiKey) {
+  if (cachedAi && cachedApiKey === apiKey) {
+    return cachedAi;
+  }
+  cachedAi = new GoogleGenAI({ apiKey });
+  cachedApiKey = apiKey;
+  return cachedAi;
+}
+
 /**
  * Analyzes a health report file (PDF, JPG, PNG) using Google Gemini AI.
  * 
@@ -17,7 +30,7 @@ export async function analyzeReport(fileBuffer, mimeType, env) {
     throw new Error('GEMINI_API_KEY environment variable is not defined.');
   }
 
-  const ai = new GoogleGenAI({ apiKey });
+  const ai = getGeminiClient(apiKey);
   try {
     // Step 1: Validate input arguments
     if (!fileBuffer || !Buffer.isBuffer(fileBuffer)) {

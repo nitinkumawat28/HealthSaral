@@ -63,28 +63,40 @@ export default function ReportResult({ reportId }) {
       // 2. Fetch the report row
       await fetchReportData(sessionToken);
 
-      // 3. Trigger processing in case it was not already initiated
+      // 3. Trigger processing and await response for instant UI update
       try {
-        fetch('/api/process-report', {
+        const response = await fetch('/api/process-report', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${sessionToken}`
           },
           body: JSON.stringify({ reportId })
-        }).catch(e => console.error('Silent processing trigger warning:', e));
+        });
+        
+        if (response.ok) {
+          const data = await response.json();
+          if (data.status === 'done') {
+            setReport(prev => prev ? { ...prev, status: 'done', ai_result: data.result } : null);
+            setStatus('done');
+            return;
+          } else if (data.status === 'failed') {
+            setStatus('failed');
+            return;
+          }
+        }
       } catch (e) {
-        // Suppress initial trigger exceptions
+        console.error('Processing trigger error:', e);
       }
     };
-
+ 
     initialize();
   }, [reportId]);
-
-  // Polling loop: If status is 'processing', poll Supabase every 3 seconds
+ 
+  // Polling loop fallback: If status is 'processing', poll Supabase every 2 seconds
   useEffect(() => {
     let intervalId;
-
+ 
     if (status === 'processing') {
       intervalId = setInterval(async () => {
         const { data, error } = await supabase
@@ -92,7 +104,7 @@ export default function ReportResult({ reportId }) {
           .select('*')
           .eq('id', reportId)
           .single();
-
+ 
         if (!error && data) {
           setReport(data);
           if (data.status === 'done') {
@@ -103,7 +115,7 @@ export default function ReportResult({ reportId }) {
             clearInterval(intervalId);
           }
         }
-      }, 3000);
+      }, 2000);
     }
 
     return () => {
