@@ -3,12 +3,11 @@ User-agent: *
 
 # Allow crawling of public pages
 Allow: /$
-Allow: /about
-Allow: /contact
-Allow: /login
-Allow: /privacy
-Allow: /terms
-Allow: /faq
+Allow: /about/
+Allow: /contact/
+Allow: /login/
+Allow: /privacy/
+Allow: /terms/
 
 # Disallow crawling of secure dashboard, dynamic medical reports, and internal API routes
 Disallow: /dashboard

@@ -14,5 +14,7 @@ export default defineConfig({
 
   integrations: [react()],
 
+  trailingSlash: 'always',
+
   adapter: cloudflare(),
 });

@@ -12,8 +12,7 @@
 		"enabled": true
 	},
 	"routes": [
-		{ "pattern": "healthsaral.in", "custom_domain": true },
-		{ "pattern": "www.healthsaral.in", "custom_domain": true }
+		{ "pattern": "healthsaral.in", "custom_domain": true }
 	],
 	"vars": {
 		"PUBLIC_SUPABASE_URL": "https://fjkukvmkhwhcnjnjexob.supabase.co",

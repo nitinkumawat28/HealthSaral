@@ -145,7 +145,7 @@ export const prerender = false;
     const { data: { session } } = await supabase.auth.getSession();
     if (!session) {
       // Redirect unauthenticated requests to login page
-      window.location.href = '/login?redirect=/dashboard';
+      window.location.href = '/login/?redirect=/dashboard/';
       return;
     }
 
@@ -223,7 +223,7 @@ export const prerender = false;
         if (report.status === 'done' || report.status === 'processing') {
           actionBtnHTML = `
             <a 
-              href="/report/${report.id}" 
+              href="/report/${report.id}/" 
               class="inline-flex items-center justify-center py-1.5 px-3 bg-primary text-white dark:bg-primary font-semibold text-xs rounded hover:opacity-90 transition-all focus:outline-none"
             >
               View Analysis

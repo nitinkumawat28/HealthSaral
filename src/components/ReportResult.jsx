@@ -54,7 +54,7 @@ export default function ReportResult({ reportId }) {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         // Redirect to login page if user is not authenticated
-        window.location.href = `/login?redirect=/report/${reportId}`;
+        window.location.href = `/login/?redirect=/report/${reportId}/`;
         return;
       }
       
@@ -193,7 +193,7 @@ export default function ReportResult({ reportId }) {
           >
             Upload a Report
           </a>
-          <a href="/dashboard" className="text-xs font-semibold text-muted hover:text-primary transition-colors text-center">
+          <a href="/dashboard/" className="text-xs font-semibold text-muted hover:text-primary transition-colors text-center">
             View All Reports
           </a>
         </div>
@@ -223,7 +223,7 @@ export default function ReportResult({ reportId }) {
           >
             Try Uploading Again
           </a>
-          <a href="/dashboard" className="text-xs font-semibold text-muted hover:text-primary transition-colors text-center">
+          <a href="/dashboard/" className="text-xs font-semibold text-muted hover:text-primary transition-colors text-center">
             View All Reports
           </a>
         </div>
@@ -253,7 +253,7 @@ export default function ReportResult({ reportId }) {
         
         {/* Navigation back to all dashboard reports */}
         <a 
-          href="/dashboard" 
+          href="/dashboard/" 
           className="text-xs sm:text-sm font-sans font-semibold text-muted hover:text-primary hover:underline transition-all flex items-center gap-1 shrink-0"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

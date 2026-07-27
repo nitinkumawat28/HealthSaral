@@ -1,6 +1,71 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { supabase } from '../lib/supabase.js';
 
+// Utility helper to compress JPG/PNG image files using canvas before upload.
+// Reduces file size under 1MB for fast upload, avoiding memory limit crashes on mobile devices.
+const compressImage = (file) => {
+  return new Promise((resolve) => {
+    if (!file || !['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
+      resolve(file);
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        // Limit max width/height to 1600px to maintain crisp OCR text readability
+        const MAX_WIDTH = 1600;
+        const MAX_HEIGHT = 1600;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(
+            (blob) => {
+              if (blob) {
+                const compressedFile = new File([blob], file.name, {
+                  type: 'image/jpeg',
+                  lastModified: Date.now(),
+                });
+                // Only return compressed file if it actually is smaller than original
+                resolve(compressedFile.size < file.size ? compressedFile : file);
+              } else {
+                resolve(file);
+              }
+            },
+            'image/jpeg',
+            0.8
+          );
+        } else {
+          resolve(file);
+        }
+      };
+      img.onerror = () => resolve(file);
+      img.src = event.target.result;
+    };
+    reader.onerror = () => resolve(file);
+    reader.readAsDataURL(file);
+  });
+};
+
 export default function UploadWidget() {
   // Local state management for drag state, selected file, and upload states
   const [file, setFile] = useState(null);
@@ -85,9 +150,19 @@ export default function UploadWidget() {
       // Retrieve the JWT bearer token
       const token = session.access_token;
       
+      // Perform client-side image compression to speed up upload and prevent memory exhaustion
+      let uploadFile = file;
+      if (['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
+        try {
+          uploadFile = await compressImage(file);
+        } catch (compressErr) {
+          console.warn('Image compression failed, using original file:', compressErr);
+        }
+      }
+
       // 2. Wrap file in a FormData object for multipart upload
       const formData = new FormData();
-      formData.append('reportFile', file);
+      formData.append('reportFile', uploadFile);
 
       // 3. Make the API request to the backend endpoint
       const response = await fetch('/api/upload-report', {
