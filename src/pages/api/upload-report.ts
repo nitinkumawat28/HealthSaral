@@ -65,11 +65,13 @@ export const POST: APIRoute = async ({ request }) => {
     const contentType = file.type;
     const userId = user.id;
 
-    // Guard: Limit user to a maximum of 5 reports per account (Gmail ID)
-    const { count: totalReportsCount, error: countError } = await supabaseAdmin
+    // Guard: Limit user to a maximum of 5 reports per day (rolling 24-hour window)
+    const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const { count: dailyReportsCount, error: countError } = await supabaseAdmin
       .from('reports')
       .select('*', { count: 'exact', head: true })
-      .eq('user_id', userId);
+      .eq('user_id', userId)
+      .gte('created_at', twentyFourHoursAgo);
 
     if (countError) {
       console.error('Failed to verify user report limit:', countError);
@@ -79,9 +81,9 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    if (totalReportsCount !== null && totalReportsCount >= 5) {
+    if (dailyReportsCount !== null && dailyReportsCount >= 5) {
       return new Response(
-        JSON.stringify({ message: 'Limit exceeded. You cannot analyze more than 5 reports per account.' }),
+        JSON.stringify({ message: 'Limit exceeded. You cannot analyze more than 5 reports per day.' }),
         { status: 403, headers: { 'Content-Type': 'application/json' } }
       );
     }
