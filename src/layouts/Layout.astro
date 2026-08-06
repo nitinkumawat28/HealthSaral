@@ -17,20 +17,48 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 <!doctype html>
 <html lang="en">
 	<head>
-		<!-- Google tag (gtag.js) - Deferred loading to maximize mobile FCP/LCP -->
+		<!-- Deferred Third-Party Scripts Loading (Google Tag Manager & Google AdSense) -->
 		<script is:inline>
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			window.gtag = gtag;
-			gtag('js', new Date());
+			(() => {
+				let scriptsLoaded = false;
 
-			window.addEventListener('load', () => {
-				const script = document.createElement('script');
-				script.src = "https://www.googletagmanager.com/gtag/js?id=G-5L34B7RTPY";
-				script.async = true;
-				document.head.appendChild(script);
-				gtag('config', 'G-5L34B7RTPY');
-			});
+				function loadDeferredScripts() {
+					if (scriptsLoaded) return;
+					scriptsLoaded = true;
+
+					// Load Google Analytics (gtag.js)
+					const gtmScript = document.createElement('script');
+					gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5L34B7RTPY";
+					gtmScript.async = true;
+					document.head.appendChild(gtmScript);
+
+					// Load Google AdSense (adsbygoogle.js)
+					const adsScript = document.createElement('script');
+					adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1781114260611546";
+					adsScript.async = true;
+					adsScript.crossOrigin = "anonymous";
+					document.head.appendChild(adsScript);
+
+					// Clean up event listeners
+					triggerEvents.forEach(event => {
+						window.removeEventListener(event, loadDeferredScripts, { passive: true });
+					});
+				}
+
+				// Immediately set up global gtag stub to prevent reference errors
+				window.dataLayer = window.dataLayer || [];
+				window.gtag = function() {
+					window.dataLayer.push(arguments);
+				};
+				window.gtag('js', new Date());
+				window.gtag('config', 'G-5L34B7RTPY');
+
+				// Listen for common user interaction events before loading scripts
+				const triggerEvents = ['touchstart', 'mousemove', 'scroll', 'keydown', 'click'];
+				triggerEvents.forEach(event => {
+					window.addEventListener(event, loadDeferredScripts, { passive: true });
+				});
+			})();
 		</script>
 
 		<meta charset="UTF-8" />
