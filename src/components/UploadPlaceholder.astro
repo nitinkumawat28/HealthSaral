@@ -30,11 +30,10 @@
     </button>
 
 <script>
-  import { supabase } from '../lib/supabase.js';
-
   const uploadBtn = document.getElementById('homepage-upload-btn');
   uploadBtn?.addEventListener('click', async () => {
-    // Check if the user already has an active Supabase session
+    // Check if the user already has an active Supabase session using lazy loaded client
+    const { supabase } = await import('../lib/supabase.js');
     const { data: { session } } = await supabase.auth.getSession();
     
     // Redirect authenticated users to the dashboard, and unauthenticated users to the login flow
