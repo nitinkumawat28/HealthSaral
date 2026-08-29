@@ -17,7 +17,10 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 <!doctype html>
 <html lang="en">
 	<head>
-		<!-- Deferred Third-Party Scripts Loading (Google Tag Manager & Google AdSense) -->
+		<!-- Google AdSense -->
+		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1781114260611546" crossorigin="anonymous"></script>
+
+		<!-- Deferred Google Analytics / GTM -->
 		<script is:inline>
 			(() => {
 				let scriptsLoaded = false;
@@ -31,13 +34,6 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 					gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5L34B7RTPY";
 					gtmScript.async = true;
 					document.head.appendChild(gtmScript);
-
-					// Load Google AdSense (adsbygoogle.js)
-					const adsScript = document.createElement('script');
-					adsScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1781114260611546";
-					adsScript.async = true;
-					adsScript.crossOrigin = "anonymous";
-					document.head.appendChild(adsScript);
 
 					// Clean up event listeners
 					triggerEvents.forEach(event => {

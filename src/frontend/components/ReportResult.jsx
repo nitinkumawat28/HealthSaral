@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabase.js';
+import { supabase } from '../../backend/lib/supabase.js';
 
 /**
  * ReportResult React Component

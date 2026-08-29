@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { supabase } from '../lib/supabase.js';
+import { supabase } from '../../backend/lib/supabase.js';
 
 // Utility helper to compress JPG/PNG image files using canvas before upload.
 // Reduces file size under 1MB for fast upload, avoiding memory limit crashes on mobile devices.

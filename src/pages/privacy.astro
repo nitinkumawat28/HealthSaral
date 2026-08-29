@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Layout from '../frontend/layouts/Layout.astro';
+import Header from '../frontend/components/Header.astro';
+import Footer from '../frontend/components/Footer.astro';
 ---
 
 <Layout 
@@ -32,7 +32,7 @@ import Footer from '../components/Footer.astro';
         <div class="space-y-4">
           <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">1. Our Commitment to Your Privacy</h2>
           <p>
-            At HealthSaral, we understand that medical and lab test records are highly sensitive personal information. We are committed to maintaining the highest level of security, confidentiality, and integrity for all data you upload or submit to our platform. We strictly enforce a <strong>zero-selling data policy</strong>: your personal details, email address, and clinical measurements will never be sold, leased, or shared with advertisers, pharmaceutical companies, or third-party brokers.
+            At HealthSaral, we understand that medical and lab test records are highly sensitive personal information. We are committed to maintaining the highest level of security, confidentiality, and integrity for all data you upload or submit to our platform. We strictly enforce a <strong>zero-selling data policy</strong>: your personal details, email address, and clinical measurements will never be sold, leased, or shared with pharmaceutical companies, or third-party data brokers. (Note: Non-personally identifiable information may be collected via cookies for third-party advertising as detailed in Section 5).
           </p>
         </div>
 
@@ -99,7 +99,20 @@ import Footer from '../components/Footer.astro';
         </div>
 
         <div class="space-y-4">
-          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">5. Changes to This Policy</h2>
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">5. Advertising and Cookies</h2>
+          <p>
+            We use third-party advertising companies to serve ads when you visit our website. These companies may use information (not including your name, address, email address, or telephone number) about your visits to this and other websites in order to provide advertisements about goods and services of interest to you.
+          </p>
+          <ul class="list-disc pl-6 space-y-2">
+            <li>Third party vendors, including Google, use cookies to serve ads based on a user's prior visits to your website or other websites.</li>
+            <li>Google's use of advertising cookies enables it and its partners to serve ads to your users based on their visit to your sites and/or other sites on the Internet.</li>
+            <li>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">Ads Settings</a>.</li>
+            <li>Alternatively, you can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="http://www.aboutads.info" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">www.aboutads.info</a>.</li>
+          </ul>
+        </div>
+
+        <div class="space-y-4">
+          <h2 class="text-xl sm:text-2xl font-display font-bold text-primary">6. Changes to This Policy</h2>
           <p>
             We may update our privacy policy to reflect changes in compliance requirements or security enhancements. We will notify registered users via email about any significant policy updates.
           </p>

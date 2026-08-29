@@ -1,5 +1,5 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from '../frontend/layouts/Layout.astro';
 ---
 
 <Layout title="Sign In — HealthSaral" description="Log in to your HealthSaral account securely using an email OTP.">
@@ -116,7 +116,7 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- Client-side script handling Supabase communication and UI toggle states -->
 <script>
-  import { supabase } from '../lib/supabase.js';
+  import { supabase } from '../backend/lib/supabase.js';
 
   // If the user is already logged in, show the profile management panel
   // instead of the email input form, enabling them to Sign Out.

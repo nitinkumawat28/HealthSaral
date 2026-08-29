@@ -1,11 +1,11 @@
 import type { APIRoute } from 'astro';
 import { env } from 'cloudflare:workers';
 import { Buffer } from 'node:buffer';
-import { supabase } from '../../lib/supabase';
-import { getSupabaseAdmin } from '../../lib/supabase-admin';
+import { supabase } from '../../backend/lib/supabase';
+import { getSupabaseAdmin } from '../../backend/lib/supabase-admin';
 import { GetObjectCommand } from '@aws-sdk/client-s3';
-import { getR2Client } from '../../lib/r2-client';
-import { analyzeReport } from '../../lib/gemini-client';
+import { getR2Client } from '../../backend/lib/r2-client';
+import { analyzeReport } from '../../backend/lib/gemini-client';
 
 // Ensure this API route is rendered server-side on-demand (non-prerendered)
 export const prerender = false;
