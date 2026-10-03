@@ -1,0 +1,60 @@
+---
+---
+
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 bg-canvas border-t border-hairline shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 transform transition-transform duration-300 translate-y-full flex flex-col md:flex-row items-center justify-between p-4 md:px-8 md:py-4 gap-4 hidden">
+  <div class="flex-1 text-sm text-muted">
+    <p>
+      We use cookies to personalize content and ads, to provide social media features and to analyze our traffic. We also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you've provided to them or that they've collected from your use of their services. 
+      <a href="/privacy/" class="text-primary hover:underline font-medium">Read our Privacy Policy</a>.
+    </p>
+  </div>
+  <div class="flex flex-row gap-3 shrink-0">
+    <button id="btn-decline-cookies" class="px-4 py-2 text-sm font-medium text-ink bg-canvas-soft border border-hairline rounded-lg hover:bg-canvas transition-colors">
+      Decline
+    </button>
+    <button id="btn-accept-cookies" class="px-4 py-2 text-sm font-medium text-canvas bg-primary rounded-lg hover:bg-primary/90 transition-colors shadow-sm">
+      Accept All
+    </button>
+  </div>
+</div>
+
+<script>
+  // Script runs on client
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('btn-accept-cookies');
+    const declineBtn = document.getElementById('btn-decline-cookies');
+
+    // Check if consent has already been given or declined
+    const consent = localStorage.getItem('cookie-consent');
+    
+    if (!consent) {
+      // Show banner by removing hidden and translating up
+      banner?.classList.remove('hidden');
+      // small timeout to allow display block to apply before transition
+      setTimeout(() => {
+        banner?.classList.remove('translate-y-full');
+      }, 50);
+    } else if (consent === 'accepted') {
+      // Action on consent accepted
+      // (AdSense script is now loaded directly in Layout.astro for approval)
+    }
+
+    const hideBanner = () => {
+      banner?.classList.add('translate-y-full');
+      setTimeout(() => {
+        banner?.classList.add('hidden');
+      }, 300); // match transition duration
+    };
+
+    acceptBtn?.addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', 'accepted');
+      hideBanner();
+    });
+
+    declineBtn?.addEventListener('click', () => {
+      localStorage.setItem('cookie-consent', 'declined');
+      hideBanner();
+    });
+  });
+</script>

@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
 	title?: string;
@@ -17,7 +18,7 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 <!doctype html>
 <html lang="en">
 	<head>
-		<!-- Google AdSense -->
+		<!-- Google AdSense Verification Script -->
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1781114260611546" crossorigin="anonymous"></script>
 
 		<!-- Deferred Google Analytics / GTM -->
@@ -129,8 +130,41 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 				document.documentElement.classList.remove('dark');
 			}
 		</script>
+
+		<!-- AI SEO: JSON-LD Structured Data -->
+		<script type="application/ld+json" set:html={JSON.stringify({
+			"@context": "https://schema.org",
+			"@graph": [
+				{
+					"@type": "SoftwareApplication",
+					"name": "HealthSaral",
+					"applicationCategory": "HealthApplication",
+					"operatingSystem": "WebBrowser",
+					"url": "https://healthsaral.in",
+					"description": "AI-powered lab report analyzer that translates clinical blood test results and medical reports into simple, understandable language.",
+					"offers": {
+						"@type": "Offer",
+						"price": "0",
+						"priceCurrency": "INR"
+					},
+					"featureList": [
+						"AI Blood Test Reader",
+						"Lab Report Analysis",
+						"Plain Language Medical Explanations",
+						"HIPAA Compliant Security"
+					]
+				},
+				{
+					"@type": "WebSite",
+					"name": "HealthSaral",
+					"url": "https://healthsaral.in",
+					"description": "Free AI Lab Report Analyzer and Blood Test Reader."
+				}
+			]
+		})} />
 	</head>
-	<body class="bg-canvas-soft text-ink font-sans antialiased min-h-screen flex flex-col">
+	<body class="bg-canvas-soft text-ink font-sans antialiased min-h-screen flex flex-col overflow-x-hidden">
 		<slot />
+		<CookieBanner />
 	</body>
 </html>

@@ -8,6 +8,7 @@ Allow: /contact/
 Allow: /login/
 Allow: /privacy/
 Allow: /terms/
+Allow: /llms.txt
 
 # Disallow crawling of secure dashboard, dynamic medical reports, and internal API routes
 Disallow: /dashboard

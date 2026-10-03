@@ -55,14 +55,22 @@
       </div>
     </div>
 
-    <!-- Divider -->
-    <div class="border-t border-hairline pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-      <span class="text-[11px] text-muted font-mono">
+    <!-- Divider & Disclaimer -->
+    <div class="border-t border-hairline pt-8 flex flex-col items-center sm:items-start gap-4">
+      <div class="w-full bg-amber-50/50 dark:bg-amber-950/20 border border-amber-200/50 dark:border-amber-900/30 rounded-lg p-4 mb-4">
+        <p class="text-[11px] text-amber-900/80 dark:text-amber-300/80 leading-relaxed text-center sm:text-left">
+          <strong class="font-semibold text-amber-900 dark:text-amber-200">Medical Disclaimer:</strong> HealthSaral is an educational tool and does not provide medical advice, diagnosis, or treatment. The AI-generated insights are for informational purposes only. Always consult a qualified healthcare provider with any questions regarding your medical condition or lab results. Do not disregard professional medical advice or delay in seeking it because of information provided on this platform.
+        </p>
+      </div>
+      
+      <div class="w-full flex flex-col sm:flex-row justify-between items-center gap-4">
+        <span class="text-[11px] text-muted font-mono">
         &copy; {new Date().getFullYear()} HealthSaral Inc. All rights reserved.
       </span>
       <span class="text-[10px] text-muted/70 font-mono text-center sm:text-right">
         Designed with clinical warmth in India. healthsaral.in
       </span>
+      </div>
     </div>
   </div>
 </footer>
