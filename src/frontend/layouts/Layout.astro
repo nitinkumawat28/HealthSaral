@@ -21,41 +21,13 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 		<!-- Google AdSense Verification Script -->
 		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1781114260611546" crossorigin="anonymous"></script>
 
-		<!-- Deferred Google Analytics / GTM -->
+		<!-- Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-5L34B7RTPY"></script>
 		<script is:inline>
-			(() => {
-				let scriptsLoaded = false;
-
-				function loadDeferredScripts() {
-					if (scriptsLoaded) return;
-					scriptsLoaded = true;
-
-					// Load Google Analytics (gtag.js)
-					const gtmScript = document.createElement('script');
-					gtmScript.src = "https://www.googletagmanager.com/gtag/js?id=G-5L34B7RTPY";
-					gtmScript.async = true;
-					document.head.appendChild(gtmScript);
-
-					// Clean up event listeners
-					triggerEvents.forEach(event => {
-						window.removeEventListener(event, loadDeferredScripts, { passive: true });
-					});
-				}
-
-				// Immediately set up global gtag stub to prevent reference errors
-				window.dataLayer = window.dataLayer || [];
-				window.gtag = function() {
-					window.dataLayer.push(arguments);
-				};
-				window.gtag('js', new Date());
-				window.gtag('config', 'G-5L34B7RTPY');
-
-				// Listen for common user interaction events before loading scripts
-				const triggerEvents = ['touchstart', 'mousemove', 'scroll', 'keydown', 'click'];
-				triggerEvents.forEach(event => {
-					window.addEventListener(event, loadDeferredScripts, { passive: true });
-				});
-			})();
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-5L34B7RTPY');
 		</script>
 
 		<meta charset="UTF-8" />
@@ -136,12 +108,13 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 			"@context": "https://schema.org",
 			"@graph": [
 				{
-					"@type": "SoftwareApplication",
+					"@type": "WebApplication",
 					"name": "HealthSaral",
 					"applicationCategory": "HealthApplication",
 					"operatingSystem": "WebBrowser",
 					"url": "https://healthsaral.in",
-					"description": "AI-powered lab report analyzer that translates clinical blood test results and medical reports into simple, understandable language.",
+					"inLanguage": ["en", "hi"],
+					"description": "AI-powered lab report analyzer that translates clinical blood test results and medical reports into simple, understandable language. Works with reports from Thyrocare, Dr Lal PathLabs, SRL, Metropolis, Apollo, and all Indian diagnostic labs.",
 					"offers": {
 						"@type": "Offer",
 						"price": "0",
@@ -150,7 +123,15 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 					"featureList": [
 						"AI Blood Test Reader",
 						"Lab Report Analysis",
+						"CBC Report Analyzer",
+						"Thyroid Panel Analyzer",
+						"Lipid Profile Analyzer",
+						"HbA1c Diabetes Report Analyzer",
+						"Vitamin D and B12 Deficiency Analysis",
+						"Kidney Function Test (KFT) Analyzer",
+						"Liver Function Test (LFT) Analyzer",
 						"Plain Language Medical Explanations",
+						"Indian Diet Recommendations",
 						"HIPAA Compliant Security"
 					]
 				},
@@ -158,7 +139,18 @@ const canonicalUrl = new URL(Astro.url.pathname, 'https://healthsaral.in').href;
 					"@type": "WebSite",
 					"name": "HealthSaral",
 					"url": "https://healthsaral.in",
-					"description": "Free AI Lab Report Analyzer and Blood Test Reader."
+					"description": "Free AI Lab Report Analyzer and Blood Test Reader for Indian patients. Analyze reports from Thyrocare, Dr Lal PathLabs, SRL, Apollo, CGHS and more."
+				},
+				{
+					"@type": "MedicalOrganization",
+					"name": "HealthSaral",
+					"url": "https://healthsaral.in",
+					"description": "AI-powered medical lab report analyzer providing free, secure, plain-language blood test explanations for Indian patients.",
+					"areaServed": {
+						"@type": "Country",
+						"name": "India"
+					},
+					"medicalSpecialty": ["Pathology", "Hematology", "Endocrinology", "Clinical Nutrition"]
 				}
 			]
 		})} />

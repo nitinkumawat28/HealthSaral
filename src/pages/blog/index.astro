@@ -1,0 +1,168 @@
+---
+import Layout from '../../frontend/layouts/Layout.astro';
+import Header from '../../frontend/components/Header.astro';
+import Footer from '../../frontend/components/Footer.astro';
+
+const posts = [
+  {
+    slug: "how-to-read-blood-test-report",
+    title: "How to Read a Blood Test Report: A Complete Guide for Patients",
+    description: "Learn to decode CBC, RBC, WBC, HGB, platelets and more from your blood test report. Plain-language explanation of every blood test parameter with Indian reference ranges.",
+    date: "2026-10-20",
+    readTime: "8 min read",
+    tags: ["Blood Test", "CBC", "Patient Guide"],
+    icon: "🩸"
+  },
+  {
+    slug: "understand-thyroid-test-report",
+    title: "Understanding Your Thyroid Test Report: TSH, T3, T4 Explained Simply",
+    description: "What do TSH, Free T3 and Free T4 values mean in your thyroid panel? Learn normal ranges, what high or low levels indicate, and when to see a doctor.",
+    date: "2026-10-25",
+    readTime: "7 min read",
+    tags: ["Thyroid", "TSH", "Hormones"],
+    icon: "🦋"
+  },
+  {
+    slug: "lipid-profile-report-guide",
+    title: "Lipid Profile Report Explained: LDL, HDL, Total Cholesterol & Triglycerides",
+    description: "Understand your lipid profile test results. What are safe cholesterol levels in India? How to lower LDL and improve HDL with an Indian diet.",
+    date: "2026-10-28",
+    readTime: "9 min read",
+    tags: ["Cholesterol", "Lipid Profile", "Heart Health"],
+    icon: "❤️"
+  },
+  {
+    slug: "hba1c-blood-sugar-report-guide",
+    title: "HbA1c Test & Fasting Blood Sugar: Understanding Diabetes Markers",
+    description: "What is a normal HbA1c level? How is it different from fasting glucose? Learn what prediabetes numbers mean and how to manage blood sugar with Indian foods.",
+    date: "2026-11-01",
+    readTime: "8 min read",
+    tags: ["Diabetes", "HbA1c", "Blood Sugar"],
+    icon: "📊"
+  },
+  {
+    slug: "vitamin-d-b12-deficiency-report",
+    title: "Vitamin D and B12 Deficiency: Reading Your Nutritional Blood Report",
+    description: "India has one of the highest rates of Vitamin D and B12 deficiency. Learn what your test values mean, what causes deficiency, and how to correct it naturally.",
+    date: "2026-11-03",
+    readTime: "7 min read",
+    tags: ["Vitamin D", "B12", "Nutrition"],
+    icon: "☀️"
+  },
+  {
+    slug: "kidney-function-test-report-explained",
+    title: "Kidney Function Test (KFT) Report Explained: Creatinine, Urea, eGFR",
+    description: "Understand your Kidney Function Test report. What do high creatinine, urea and low eGFR values mean? Early signs of kidney stress explained in plain language.",
+    date: "2026-11-04",
+    readTime: "8 min read",
+    tags: ["KFT", "Kidney Health", "Creatinine"],
+    icon: "🫘"
+  },
+  {
+    slug: "liver-function-test-report-guide",
+    title: "Liver Function Test (LFT) Results Explained: SGPT, SGOT, Bilirubin",
+    description: "What is a normal SGPT and SGOT level? Learn what your LFT report markers mean, what causes elevated liver enzymes, and how to protect liver health with diet.",
+    date: "2026-11-05",
+    readTime: "9 min read",
+    tags: ["LFT", "Liver Health", "SGPT"],
+    icon: "🫀"
+  },
+  {
+    slug: "complete-blood-count-cbc-normal-range-india",
+    title: "CBC Normal Range in India: Complete Blood Count Reference Values",
+    description: "Reference ranges for all CBC parameters in India — WBC, RBC, Hemoglobin, Hematocrit, MCV, MCH, MCHC, Platelets. Gender-specific and age-based normal values explained.",
+    date: "2026-11-05",
+    readTime: "10 min read",
+    tags: ["CBC", "Normal Range", "Reference Values"],
+    icon: "📋"
+  }
+];
+---
+
+<Layout 
+  title="Health & Lab Report Blog — Patient Guides | HealthSaral"
+  description="Learn how to read your blood test, thyroid panel, lipid profile and more. Free patient guides on understanding medical lab reports, with Indian reference ranges and diet tips."
+>
+  <Header />
+
+  <main class="flex-grow">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-mesh-gradient pt-16 pb-16 px-4 sm:px-6 lg:px-8 border-b border-hairline">
+      <div class="w-full max-w-4xl mx-auto text-center">
+        <span class="flex w-fit mx-auto items-center justify-center gap-1.5 px-3 py-1 bg-primary/5 border border-primary/10 text-primary text-[10px] sm:text-[11px] font-mono rounded-full uppercase tracking-wider mb-6 max-w-full">
+          Free Patient Education
+        </span>
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-primary tracking-tight mb-4 text-balance">
+          Understand Every Lab Report. In Plain Language.
+        </h1>
+        <p class="text-sm sm:text-base text-muted max-w-2xl mx-auto leading-relaxed text-pretty">
+          Evidence-based patient guides on reading blood tests, thyroid panels, lipid profiles, kidney function tests and more — written for Indian patients, with Indian food recommendations.
+        </p>
+      </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16 md:py-20 bg-canvas px-4 sm:px-6 lg:px-8">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map((post) => (
+            <a 
+              href={`/blog/${post.slug}/`}
+              class="group border border-hairline bg-canvas rounded-xl p-6 shadow-sm hover:shadow-md-stacked transition-all duration-300 hover:border-primary/20 flex flex-col"
+            >
+              <div class="text-3xl mb-4">{post.icon}</div>
+              <div class="flex flex-wrap gap-2 mb-3">
+                {post.tags.map(tag => (
+                  <span class="text-[10px] font-mono text-primary bg-primary/5 border border-primary/10 px-2 py-0.5 rounded-full uppercase tracking-wide">{tag}</span>
+                ))}
+              </div>
+              <h2 class="text-base sm:text-lg font-display font-semibold text-primary mb-2 leading-snug group-hover:text-accent transition-colors">
+                {post.title}
+              </h2>
+              <p class="text-xs sm:text-sm text-muted leading-relaxed flex-grow text-pretty">
+                {post.description}
+              </p>
+              <div class="flex items-center justify-between mt-4 pt-4 border-t border-hairline/60">
+                <span class="text-xs text-muted font-mono">{post.date}</span>
+                <span class="text-xs text-muted font-mono">{post.readTime}</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-14 bg-primary/5 border-t border-hairline text-center px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <h2 class="text-2xl sm:text-3xl font-display font-bold text-primary mb-4">
+          Have a report you want explained right now?
+        </h2>
+        <p class="text-sm sm:text-base text-muted mb-8 max-w-xl mx-auto">
+          Skip the reading. Upload your PDF or photo and get an instant AI analysis of every marker — free, secure, and in plain language.
+        </p>
+        <a href="/#upload-section" class="px-6 py-3 bg-accent hover:bg-accent/90 text-white font-sans font-medium text-sm rounded-full shadow-sm transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          Analyze My Report Free
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "HealthSaral Patient Guides",
+  "url": "https://healthsaral.in/blog/",
+  "description": "Patient education guides on understanding blood tests and medical lab reports, written for Indian patients.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "HealthSaral",
+    "url": "https://healthsaral.in"
+  }
+}
+</script>
+

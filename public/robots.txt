@@ -1,14 +1,17 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
 
-# Allow crawling of public pages
+# Allow crawling of all public pages
 Allow: /$
 Allow: /about/
 Allow: /contact/
 Allow: /login/
 Allow: /privacy/
 Allow: /terms/
+Allow: /blog/
+Allow: /blog/*
 Allow: /llms.txt
+Allow: /sitemap.xml
 
 # Disallow crawling of secure dashboard, dynamic medical reports, and internal API routes
 Disallow: /dashboard
