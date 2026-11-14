@@ -1,0 +1,429 @@
+---
+import Layout from '../../frontend/layouts/Layout.astro';
+import Header from '../../frontend/components/Header.astro';
+import Footer from '../../frontend/components/Footer.astro';
+import BlogShareBar from '../../frontend/components/BlogShareBar.astro';
+
+const title = "Asian-Indian BMI Calculator — Free Body Mass Index Check | HealthSaral";
+const description = "Calculate your BMI using ICMR & WHO Asia-Pacific cutoffs for Indians. Check healthy weight range, visceral fat risk, and Indian dietary tips.";
+const pageUrl = "https://healthsaral.in/tools/bmi-calculator/";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+
+  <!-- Breadcrumbs -->
+  <nav aria-label="Breadcrumb" class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-0">
+    <ol class="flex flex-wrap items-center gap-1.5 text-xs font-mono text-muted">
+      <li><a href="/" class="hover:text-primary transition-colors">Home</a></li>
+      <li class="text-muted/50" aria-hidden="true">›</li>
+      <li><a href="/tools/" class="hover:text-primary transition-colors">Tools</a></li>
+      <li class="text-muted/50" aria-hidden="true">›</li>
+      <li><span class="text-primary/80" aria-current="page">Asian-Indian BMI Calculator</span></li>
+    </ol>
+  </nav>
+
+  <main class="flex-grow">
+    <!-- Hero -->
+    <section class="relative overflow-hidden bg-mesh-gradient pt-10 pb-12 px-4 sm:px-6 lg:px-8 border-b border-hairline">
+      <div class="w-full max-w-3xl mx-auto text-center">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary/5 border border-primary/10 text-primary text-[10px] sm:text-[11px] font-mono rounded-full uppercase tracking-wider mb-4">
+          <span>ICMR &amp; WHO Consensus for South Asians</span>
+        </span>
+        <h1 class="text-2xl sm:text-3xl md:text-4xl font-display font-bold text-primary tracking-tight mb-3 text-balance">
+          Asian-Indian BMI &amp; Health Risk Calculator
+        </h1>
+        <p class="text-xs sm:text-sm text-muted max-w-xl mx-auto leading-relaxed">
+          Standard international BMI cutoffs underestimate health risks in Indians. This calculator uses official <strong>ICMR (Indian Council of Medical Research)</strong> criteria to assess your body composition and metabolic health.
+        </p>
+      </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section class="py-12 bg-canvas px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto grid md:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Form inputs -->
+        <div class="md:col-span-6 bg-canvas-soft border border-hairline rounded-2xl p-6 sm:p-7 shadow-sm">
+          <!-- Unit Selector Tabs -->
+          <div class="flex items-center bg-canvas p-1 rounded-full border border-hairline mb-6">
+            <button 
+              id="unit-metric" 
+              type="button" 
+              class="w-1/2 py-1.5 text-xs font-mono font-semibold rounded-full bg-primary text-white transition-all cursor-pointer"
+            >
+              Metric (cm, kg)
+            </button>
+            <button 
+              id="unit-imperial" 
+              type="button" 
+              class="w-1/2 py-1.5 text-xs font-mono font-semibold rounded-full text-muted hover:text-primary transition-all cursor-pointer"
+            >
+              Imperial (ft, in, lbs)
+            </button>
+          </div>
+
+          <form id="bmi-form" class="space-y-4" onsubmit="return false;">
+            <!-- Gender -->
+            <div>
+              <label class="block text-xs font-mono text-muted uppercase tracking-wider mb-2">Biological Sex</label>
+              <div class="grid grid-cols-2 gap-3">
+                <label class="flex items-center justify-center gap-2 p-2.5 bg-canvas border border-hairline rounded-xl cursor-pointer hover:border-primary/40 has-checked:border-primary has-checked:bg-primary/5 text-xs font-medium">
+                  <input type="radio" name="gender" value="male" checked class="accent-primary" />
+                  <span>Male</span>
+                </label>
+                <label class="flex items-center justify-center gap-2 p-2.5 bg-canvas border border-hairline rounded-xl cursor-pointer hover:border-primary/40 has-checked:border-primary has-checked:bg-primary/5 text-xs font-medium">
+                  <input type="radio" name="gender" value="female" class="accent-primary" />
+                  <span>Female</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Age -->
+            <div>
+              <label for="age-input" class="block text-xs font-mono text-muted uppercase tracking-wider mb-1.5">Age (Years)</label>
+              <input 
+                type="number" 
+                id="age-input" 
+                min="2" 
+                max="120" 
+                value="28" 
+                class="w-full px-3.5 py-2.5 bg-canvas border border-hairline rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-ink"
+              />
+            </div>
+
+            <!-- Metric Height & Weight -->
+            <div id="metric-inputs" class="space-y-4">
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label for="height-cm" class="text-xs font-mono text-muted uppercase tracking-wider">Height (cm)</label>
+                  <span id="height-cm-val" class="text-xs font-mono text-primary font-bold">170 cm</span>
+                </div>
+                <input 
+                  type="range" 
+                  id="height-cm" 
+                  min="120" 
+                  max="220" 
+                  value="170" 
+                  class="w-full accent-primary cursor-pointer"
+                />
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label for="weight-kg" class="text-xs font-mono text-muted uppercase tracking-wider">Weight (kg)</label>
+                  <span id="weight-kg-val" class="text-xs font-mono text-primary font-bold">68 kg</span>
+                </div>
+                <input 
+                  type="range" 
+                  id="weight-kg" 
+                  min="30" 
+                  max="160" 
+                  value="68" 
+                  class="w-full accent-primary cursor-pointer"
+                />
+              </div>
+            </div>
+
+            <!-- Imperial Height & Weight (Hidden by default) -->
+            <div id="imperial-inputs" class="space-y-4 hidden">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label for="height-ft" class="block text-xs font-mono text-muted uppercase tracking-wider mb-1.5">Height (Feet)</label>
+                  <input 
+                    type="number" 
+                    id="height-ft" 
+                    min="3" 
+                    max="8" 
+                    value="5" 
+                    class="w-full px-3.5 py-2.5 bg-canvas border border-hairline rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-ink"
+                  />
+                </div>
+                <div>
+                  <label for="height-in" class="block text-xs font-mono text-muted uppercase tracking-wider mb-1.5">Height (Inches)</label>
+                  <input 
+                    type="number" 
+                    id="height-in" 
+                    min="0" 
+                    max="11" 
+                    value="7" 
+                    class="w-full px-3.5 py-2.5 bg-canvas border border-hairline rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-ink"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label for="weight-lbs" class="block text-xs font-mono text-muted uppercase tracking-wider mb-1.5">Weight (Pounds / lbs)</label>
+                <input 
+                  type="number" 
+                  id="weight-lbs" 
+                  min="66" 
+                  max="350" 
+                  value="150" 
+                  class="w-full px-3.5 py-2.5 bg-canvas border border-hairline rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/20 text-ink"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Right: Results Card -->
+        <div class="md:col-span-6 bg-canvas border border-hairline rounded-2xl p-6 sm:p-7 shadow-md-stacked flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-mono text-muted uppercase tracking-wider block mb-1">Your Calculated BMI</span>
+            <div class="flex items-baseline gap-3 mb-2">
+              <span id="bmi-number" class="text-4xl sm:text-5xl font-display font-bold text-primary">23.5</span>
+              <span id="bmi-status-badge" class="px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wide bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20">
+                Overweight (Indian Criteria)
+              </span>
+            </div>
+
+            <!-- Custom Visual Gauge Scale -->
+            <div class="w-full my-5">
+              <div class="h-3 w-full rounded-full flex overflow-hidden border border-hairline/60">
+                <div class="bg-blue-400 w-[20%]" title="Underweight (<18.5)"></div>
+                <div class="bg-emerald-500 w-[30%]" title="Normal (18.5 - 22.9)"></div>
+                <div class="bg-amber-400 w-[20%]" title="Overweight (23.0 - 24.9)"></div>
+                <div class="bg-rose-500 w-[30%]" title="Obese (≥25.0)"></div>
+              </div>
+              <div class="flex justify-between text-[10px] font-mono text-muted mt-1.5 px-0.5">
+                <span>&lt;18.5</span>
+                <span>18.5–22.9</span>
+                <span>23–24.9</span>
+                <span>&ge;25.0</span>
+              </div>
+            </div>
+
+            <!-- Healthy weight range -->
+            <div class="bg-canvas-soft border border-hairline rounded-xl p-4 mb-4">
+              <p class="text-xs text-muted leading-relaxed">
+                <strong class="text-ink">Recommended Indian Healthy Weight:</strong> <span id="ideal-weight-range" class="text-primary font-mono font-bold">53.5 – 66.2 kg</span>
+              </p>
+            </div>
+
+            <!-- Explanation Box -->
+            <div id="risk-explanation" class="text-xs text-ink/90 leading-relaxed space-y-2 mb-6">
+              <p>
+                Under the Indian ICMR guidelines, a BMI above <strong>23.0 kg/m²</strong> signals elevated visceral adiposity, higher insulin resistance, and heightened predisposition to Type 2 diabetes and hypertension.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Action -->
+          <div class="border-t border-hairline pt-5">
+            <a 
+              href="/#upload-section" 
+              class="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-accent hover:bg-accent/90 text-white font-sans font-semibold text-xs sm:text-sm rounded-full shadow-md transition-all"
+            >
+              Decode Blood Tests for Metabolic Health &rarr;
+            </a>
+            <span class="block text-center text-[10.5px] font-mono text-muted mt-2">
+              Check your Fasting Sugar, HbA1c &amp; Lipid Profile free
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Context & Scientific Guidelines -->
+    <section class="py-14 bg-canvas-soft border-t border-hairline px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto prose dark:prose-invert prose-sm font-sans text-ink leading-relaxed">
+        <h2 class="text-xl font-display font-bold text-primary mb-4">Why are Indian BMI Cutoffs Different from Global Standards?</h2>
+        <p>
+          International World Health Organization (WHO) standards classify a normal BMI as <strong>18.5 to 24.9 kg/m²</strong>. However, extensive physiological research led by the <strong>ICMR, Association of Physicians of India (API), and WHO Asia-Pacific Task Force</strong> revealed that individuals of South Asian ancestry exhibit the <em>"Asian Indian Phenotype"</em>:
+        </p>
+        <ul role="list">
+          <li><strong>Higher Body Fat Percentage:</strong> At the same BMI, Indians have 3% to 5% more body fat compared to Caucasians.</li>
+          <li><strong>Visceral Adiposity:</strong> Fat tends to deposit around abdominal organs (deep belly fat) rather than under the skin.</li>
+          <li><strong>Cardiometabolic Risk at Lower Weight:</strong> Insulin resistance, prediabetes, and heart disease appear at much lower BMIs in Indians.</li>
+        </ul>
+
+        <div class="overflow-x-auto my-6">
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-hairline text-primary font-mono">
+                <th class="py-2.5">Category</th>
+                <th class="py-2.5">WHO Global Cutoff</th>
+                <th class="py-2.5 font-bold text-primary">Indian ICMR Cutoff</th>
+                <th class="py-2.5">Risk Profile</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-hairline">
+              <tr>
+                <td class="py-2.5 font-medium">Underweight</td>
+                <td>&lt; 18.5 kg/m²</td>
+                <td class="font-bold text-blue-600 dark:text-blue-400">&lt; 18.5 kg/m²</td>
+                <td>Nutritional deficiency, low bone density</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 font-medium">Normal Weight</td>
+                <td>18.5 – 24.9 kg/m²</td>
+                <td class="font-bold text-emerald-600 dark:text-emerald-400">18.5 – 22.9 kg/m²</td>
+                <td>Optimal cardiovascular balance</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 font-medium">Overweight</td>
+                <td>25.0 – 29.9 kg/m²</td>
+                <td class="font-bold text-amber-600 dark:text-amber-400">23.0 – 24.9 kg/m²</td>
+                <td>Increased risk for insulin resistance</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 font-medium">Obese</td>
+                <td>&ge; 30.0 kg/m²</td>
+                <td class="font-bold text-rose-600 dark:text-rose-400">&ge; 25.0 kg/m²</td>
+                <td>High risk for diabetes &amp; dyslipidemia</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="text-lg font-display font-bold text-primary mt-6 mb-3">Actionable Steps for South Asian Health</h3>
+        <p>
+          If your BMI falls in the overweight or obese zone:
+        </p>
+        <ol role="list">
+          <li><strong>Prioritize Protein &amp; Fiber:</strong> Replace refined wheat/rice with lentils (moong, chana), sattu, paneer, sprouts, and leafy greens.</li>
+          <li><strong>Reduce Simple Carbs:</strong> Minimize deep-fried snacks, sweets, white bread, and sugary tea.</li>
+          <li><strong>Track Visceral Biomarkers:</strong> Get regular annual tests for Fasting Blood Sugar, HbA1c, and Lipid Profile (Triglycerides &amp; HDL).</li>
+        </ol>
+      </div>
+
+      <!-- Share Bar -->
+      <div class="max-w-3xl mx-auto mt-8">
+        <BlogShareBar title="Asian-Indian BMI & Health Risk Calculator" url={pageUrl} />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script is:inline>
+  // BMI Interactive Calculator Logic
+  let currentUnit = 'metric';
+
+  const unitMetricBtn = document.getElementById('unit-metric');
+  const unitImperialBtn = document.getElementById('unit-imperial');
+  const metricInputs = document.getElementById('metric-inputs');
+  const imperialInputs = document.getElementById('imperial-inputs');
+
+  const heightCmSlider = document.getElementById('height-cm');
+  const heightCmVal = document.getElementById('height-cm-val');
+  const weightKgSlider = document.getElementById('weight-kg');
+  const weightKgVal = document.getElementById('weight-kg-val');
+
+  const heightFtInput = document.getElementById('height-ft');
+  const heightInInput = document.getElementById('height-in');
+  const weightLbsInput = document.getElementById('weight-lbs');
+
+  const bmiNumberEl = document.getElementById('bmi-number');
+  const bmiBadgeEl = document.getElementById('bmi-status-badge');
+  const idealWeightEl = document.getElementById('ideal-weight-range');
+  const riskExplEl = document.getElementById('risk-explanation');
+
+  function calculateBMI() {
+    let heightM = 0;
+    let weightKg = 0;
+
+    if (currentUnit === 'metric') {
+      const cm = parseFloat(heightCmSlider.value);
+      weightKg = parseFloat(weightKgSlider.value);
+      heightCmVal.textContent = cm + ' cm';
+      weightKgVal.textContent = weightKg + ' kg';
+      heightM = cm / 100;
+    } else {
+      const feet = parseFloat(heightFtInput.value) || 0;
+      const inches = parseFloat(heightInInput.value) || 0;
+      const totalInches = (feet * 12) + inches;
+      heightM = totalInches * 0.0254;
+      const lbs = parseFloat(weightLbsInput.value) || 0;
+      weightKg = lbs * 0.45359237;
+    }
+
+    if (!heightM || heightM <= 0 || !weightKg || weightKg <= 0) return;
+
+    const bmi = weightKg / (heightM * heightM);
+    const roundedBMI = bmi.toFixed(1);
+    bmiNumberEl.textContent = roundedBMI;
+
+    // Ideal weight based on Indian normal range (18.5 - 22.9)
+    const minIdeal = (18.5 * (heightM * heightM)).toFixed(1);
+    const maxIdeal = (22.9 * (heightM * heightM)).toFixed(1);
+    if (currentUnit === 'metric') {
+      idealWeightEl.textContent = `${minIdeal} – ${maxIdeal} kg`;
+    } else {
+      const minLbs = (minIdeal * 2.20462).toFixed(0);
+      const maxLbs = (maxIdeal * 2.20462).toFixed(0);
+      idealWeightEl.textContent = `${minLbs} – ${maxLbs} lbs (${minIdeal} – ${maxIdeal} kg)`;
+    }
+
+    // Status evaluation (Indian ICMR cutoff)
+    if (bmi < 18.5) {
+      bmiBadgeEl.textContent = 'Underweight';
+      bmiBadgeEl.className = 'px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wide bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-500/20';
+      riskExplEl.innerHTML = '<p>Your BMI is below 18.5 kg/m². This may indicate insufficient nutrient intake, low muscle mass, or risk of anemia and micronutrient deficiencies (Vitamin D, B12, Iron). Focus on nutrient-dense foods like sattu, paneer, nuts, and lentils.</p>';
+    } else if (bmi <= 22.9) {
+      bmiBadgeEl.textContent = 'Normal (Healthy Indian Range)';
+      bmiBadgeEl.className = 'px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wide bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20';
+      riskExplEl.innerHTML = '<p>Your BMI is in the optimal range for South Asians (18.5 – 22.9 kg/m²). This correlates with lowest risk of metabolic syndrome. Continue balanced nutrition and maintain at least 150 minutes of moderate physical activity weekly.</p>';
+    } else if (bmi <= 24.9) {
+      bmiBadgeEl.textContent = 'Overweight (Indian Criteria)';
+      bmiBadgeEl.className = 'px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wide bg-amber-500/10 text-amber-700 dark:text-amber-400 border border-amber-500/20';
+      riskExplEl.innerHTML = '<p>Under Indian clinical criteria, a BMI between <strong>23.0 – 24.9 kg/m²</strong> represents overweight status. South Asians in this bracket have higher risk of abdominal adiposity and early insulin resistance. Consider tracking your HbA1c and lipid levels.</p>';
+    } else {
+      bmiBadgeEl.textContent = 'Obese (Indian Criteria)';
+      bmiBadgeEl.className = 'px-3 py-1 rounded-full text-xs font-mono font-semibold uppercase tracking-wide bg-rose-500/10 text-rose-700 dark:text-rose-400 border border-rose-500/20';
+      riskExplEl.innerHTML = '<p>A BMI of <strong>25.0 kg/m² or higher</strong> meets the Indian threshold for obesity. This is strongly associated with elevated risk for Type 2 diabetes, non-alcoholic fatty liver (NAFLD), and high blood pressure. Consult a doctor and check regular metabolic blood panels.</p>';
+    }
+  }
+
+  // Switch tabs
+  unitMetricBtn.addEventListener('click', () => {
+    currentUnit = 'metric';
+    unitMetricBtn.className = 'w-1/2 py-1.5 text-xs font-mono font-semibold rounded-full bg-primary text-white transition-all cursor-pointer';
+    unitImperialBtn.className = 'w-1/2 py-1.5 text-xs font-mono font-semibold rounded-full text-muted hover:text-primary transition-all cursor-pointer';
+    metricInputs.classList.remove('hidden');
+    imperialInputs.classList.add('hidden');
+    calculateBMI();
+  });
+
+  unitImperialBtn.addEventListener('click', () => {
+    currentUnit = 'imperial';
+    unitImperialBtn.className = 'w-1/2 py-1.5 text-xs font-mono font-semibold rounded-full bg-primary text-white transition-all cursor-pointer';
+    unitMetricBtn.className = 'w-1/2 py-1.5 text-xs font-mono font-semibold rounded-full text-muted hover:text-primary transition-all cursor-pointer';
+    imperialInputs.classList.remove('hidden');
+    metricInputs.classList.add('hidden');
+    calculateBMI();
+  });
+
+  // Listeners
+  heightCmSlider.addEventListener('input', calculateBMI);
+  weightKgSlider.addEventListener('input', calculateBMI);
+  heightFtInput.addEventListener('input', calculateBMI);
+  heightInInput.addEventListener('input', calculateBMI);
+  weightLbsInput.addEventListener('input', calculateBMI);
+
+  calculateBMI();
+</script>
+
+<script type="application/ld+json" is:inline>
+{
+  "@context": "https://schema.org",
+  "@type": ["WebApplication", "MedicalWebPage"],
+  "name": "Asian-Indian BMI Calculator",
+  "url": "https://healthsaral.in/tools/bmi-calculator/",
+  "applicationCategory": "HealthApplication",
+  "operatingSystem": "WebBrowser",
+  "description": "Free Body Mass Index calculator calibrated to Indian ICMR and WHO Asia-Pacific reference standards.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "HealthSaral",
+    "url": "https://healthsaral.in"
+  },
+  "medicalAudience": {
+    "@type": "PatientAudience",
+    "audienceType": "Patient"
+  }
+}
+</script>

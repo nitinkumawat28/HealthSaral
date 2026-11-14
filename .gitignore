@@ -17,6 +17,10 @@ pnpm-debug.log*
 .env
 .env.production
 
+# local scratch & state
+.wrangler/
+scratch/
+
 # macOS-specific files
 .DS_Store
 

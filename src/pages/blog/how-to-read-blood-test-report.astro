@@ -2,6 +2,8 @@
 import Layout from '../../frontend/layouts/Layout.astro';
 import Header from '../../frontend/components/Header.astro';
 import Footer from '../../frontend/components/Footer.astro';
+import BlogShareBar from '../../frontend/components/BlogShareBar.astro';
+import BlogBreadcrumbs from '../../frontend/components/BlogBreadcrumbs.astro';
 ---
 
 <Layout 
@@ -9,6 +11,7 @@ import Footer from '../../frontend/components/Footer.astro';
   description="Learn how to read your blood test report step by step. Understand CBC parameters like WBC, RBC, HGB, MCV, MCH, platelets with Indian normal ranges. Free guide for patients."
 >
   <Header />
+  <BlogBreadcrumbs title="How to Read a Blood Test Report: A Complete Guide for Patients" slug="how-to-read-blood-test-report" />
 
   <main class="flex-grow">
     <!-- Hero -->
@@ -178,20 +181,34 @@ import Footer from '../../frontend/components/Footer.astro';
       </div>
     </article>
 
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BlogShareBar title="How to Read a Blood Test Report: A Complete Guide for Patients" url="https://healthsaral.in/blog/how-to-read-blood-test-report/" />
+    </div>
+
     <!-- Related Posts -->
     <section class="py-12 bg-canvas-soft border-t border-hairline px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-xl font-display font-bold text-primary mb-6">Related Patient Guides</h2>
         <div class="grid sm:grid-cols-2 gap-4">
-          <a href="/blog/understand-thyroid-test-report/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
-            <span class="text-2xl block mb-2">🦋</span>
-            <h3 class="text-sm font-display font-semibold text-primary mb-1">Understanding Thyroid Test Results: TSH, T3, T4 Explained</h3>
-            <span class="text-xs text-muted">7 min read</span>
-          </a>
           <a href="/blog/complete-blood-count-cbc-normal-range-india/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
             <span class="text-2xl block mb-2">📋</span>
             <h3 class="text-sm font-display font-semibold text-primary mb-1">CBC Normal Range in India: All Parameters Reference Values</h3>
             <span class="text-xs text-muted">10 min read</span>
+          </a>
+          <a href="/blog/vitamin-d-b12-deficiency-report/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">☀️</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">Vitamin D & B12 Deficiency: Reading Your Nutritional Report</h3>
+            <span class="text-xs text-muted">7 min read</span>
+          </a>
+          <a href="/blog/understand-thyroid-test-report/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">🦋</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">Understanding Thyroid Test: TSH, T3, T4 Explained</h3>
+            <span class="text-xs text-muted">7 min read</span>
+          </a>
+          <a href="/blog/hba1c-blood-sugar-report-guide/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">📊</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">HbA1c & Fasting Blood Sugar: Diabetes Markers</h3>
+            <span class="text-xs text-muted">8 min read</span>
           </a>
         </div>
       </div>
@@ -204,29 +221,53 @@ import Footer from '../../frontend/components/Footer.astro';
 <script type="application/ld+json" is:inline>
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": [
+    "Article",
+    "MedicalWebPage"
+  ],
   "headline": "How to Read a Blood Test Report: A Complete Guide for Patients",
   "description": "Learn how to read your blood test report step by step. Understand CBC parameters like WBC, RBC, HGB, MCV, MCH, platelets with Indian normal ranges.",
   "datePublished": "2026-10-20",
-  "dateModified": "2026-11-05",
+  "dateModified": "2026-11-14",
   "author": {
-    "@type": "Organization",
-    "name": "HealthSaral Medical Team"
+    "@type": "Person",
+    "name": "Dr. Anjali Sharma, MD",
+    "jobTitle": "Endocrinologist",
+    "url": "https://healthsaral.in/about/"
   },
   "publisher": {
     "@type": "Organization",
     "name": "HealthSaral",
-    "url": "https://healthsaral.in"
+    "url": "https://healthsaral.in",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://healthsaral.in/favicon-96x96.png"
+    }
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
     "@id": "https://healthsaral.in/blog/how-to-read-blood-test-report/"
   },
   "about": [
-    {"@type": "MedicalCondition", "name": "Anemia"},
-    {"@type": "MedicalTest", "name": "Complete Blood Count"},
-    {"@type": "MedicalTest", "name": "Hemoglobin Test"}
-  ]
+    {
+      "@type": "MedicalCondition",
+      "name": "Anemia"
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Complete Blood Count"
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Hemoglobin Test"
+    }
+  ],
+  "medicalAudience": {
+    "@type": "PatientAudience",
+    "audienceType": "Patient"
+  },
+  "inLanguage": "en",
+  "isAccessibleForFree": true
 }
 </script>
 

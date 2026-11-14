@@ -2,6 +2,8 @@
 import Layout from '../../frontend/layouts/Layout.astro';
 import Header from '../../frontend/components/Header.astro';
 import Footer from '../../frontend/components/Footer.astro';
+import BlogShareBar from '../../frontend/components/BlogShareBar.astro';
+import BlogBreadcrumbs from '../../frontend/components/BlogBreadcrumbs.astro';
 ---
 
 <Layout 
@@ -9,6 +11,7 @@ import Footer from '../../frontend/components/Footer.astro';
   description="Understand your lipid profile test report. What are safe LDL, HDL cholesterol and triglyceride levels in India? How to read your lipid panel and improve heart health with Indian diet."
 >
   <Header />
+  <BlogBreadcrumbs title="Lipid Profile Report Explained: LDL, HDL, Total Cholesterol & Triglycerides" slug="lipid-profile-report-guide" />
 
   <main class="flex-grow">
     <section class="relative overflow-hidden bg-mesh-gradient pt-14 pb-16 px-4 sm:px-6 lg:px-8 border-b border-hairline">
@@ -117,18 +120,32 @@ import Footer from '../../frontend/components/Footer.astro';
       </div>
     </article>
 
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BlogShareBar title="Lipid Profile Report Explained: LDL, HDL, Total Cholesterol & Triglycerides" url="https://healthsaral.in/blog/lipid-profile-report-guide/" />
+    </div>
+
     <section class="py-12 bg-canvas-soft border-t border-hairline px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-xl font-display font-bold text-primary mb-6">Related Patient Guides</h2>
         <div class="grid sm:grid-cols-2 gap-4">
           <a href="/blog/hba1c-blood-sugar-report-guide/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
             <span class="text-2xl block mb-2">📊</span>
-            <h3 class="text-sm font-display font-semibold text-primary mb-1">HbA1c & Blood Sugar: Understanding Diabetes Markers</h3>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">HbA1c & Blood Sugar: Diabetes Markers Explained</h3>
+            <span class="text-xs text-muted">8 min read</span>
+          </a>
+          <a href="/blog/how-to-read-blood-test-report/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">🩸</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">How to Read a Blood Test Report: Complete Guide</h3>
+            <span class="text-xs text-muted">8 min read</span>
+          </a>
+          <a href="/blog/kidney-function-test-report-explained/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">🫘</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">Kidney Function Test (KFT): Creatinine & eGFR</h3>
             <span class="text-xs text-muted">8 min read</span>
           </a>
           <a href="/blog/liver-function-test-report-guide/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
             <span class="text-2xl block mb-2">🫀</span>
-            <h3 class="text-sm font-display font-semibold text-primary mb-1">Liver Function Test: SGPT, SGOT, Bilirubin Explained</h3>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">Liver Function Test (LFT): SGPT, SGOT Explained</h3>
             <span class="text-xs text-muted">9 min read</span>
           </a>
         </div>
@@ -142,15 +159,53 @@ import Footer from '../../frontend/components/Footer.astro';
 <script type="application/ld+json" is:inline>
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": [
+    "Article",
+    "MedicalWebPage"
+  ],
   "headline": "Lipid Profile Report Explained: LDL, HDL, Total Cholesterol & Triglycerides",
-  "description": "Understand your lipid profile test report. What are safe LDL, HDL cholesterol and triglyceride levels in India? How to read your lipid panel and improve heart health with Indian diet.",
+  "description": "Understand your lipid profile test report. Safe LDL, HDL cholesterol and triglyceride levels in India. How to improve heart health with Indian diet.",
   "datePublished": "2026-10-28",
-  "dateModified": "2026-11-05",
-  "author": {"@type": "Organization", "name": "HealthSaral Medical Team"},
-  "publisher": {"@type": "Organization", "name": "HealthSaral", "url": "https://healthsaral.in"},
-  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://healthsaral.in/blog/lipid-profile-report-guide/"},
-  "about": [{"@type": "MedicalCondition", "name": "Hypercholesterolemia"}, {"@type": "MedicalTest", "name": "Lipid Panel"}]
+  "dateModified": "2026-11-14",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Rajesh Verma, MBBS",
+    "jobTitle": "Pathologist",
+    "url": "https://healthsaral.in/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HealthSaral",
+    "url": "https://healthsaral.in",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://healthsaral.in/favicon-96x96.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://healthsaral.in/blog/lipid-profile-report-guide/"
+  },
+  "about": [
+    {
+      "@type": "MedicalCondition",
+      "name": "Hyperlipidemia"
+    },
+    {
+      "@type": "MedicalCondition",
+      "name": "Cardiovascular Disease"
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Lipid Profile"
+    }
+  ],
+  "medicalAudience": {
+    "@type": "PatientAudience",
+    "audienceType": "Patient"
+  },
+  "inLanguage": "en",
+  "isAccessibleForFree": true
 }
 </script>
 

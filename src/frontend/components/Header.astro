@@ -55,6 +55,16 @@ const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash for ma
         About Us
       </a>
       <a 
+        href="/tools/" 
+        class={`text-xs font-sans font-semibold rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
+          currentPath.startsWith('/tools') 
+            ? 'bg-primary/5 text-primary border border-hairline/60' 
+            : 'text-muted hover:text-primary hover:bg-primary/5'
+        }`}
+      >
+        Calculators
+      </a>
+      <a 
         href="/blog/" 
         class={`text-xs font-sans font-semibold rounded-full px-3 py-1.5 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
           currentPath.startsWith('/blog') 
@@ -133,6 +143,8 @@ const currentPath = pathname.replace(/\/$/, ""); // Remove trailing slash for ma
       <a href="/#sample-preview" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Sample output</a>
       <a href="/#why-saral" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Why HealthSaral</a>
       <a href="/#our-mission" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Our Mission</a>
+      <a href="/tools/" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Health Calculators</a>
+      <a href="/blog/" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">Patient Guides</a>
       <a href="/about/" class="mobile-nav-link text-sm font-sans font-medium text-muted hover:text-primary transition-colors py-1">About Us</a>
     </nav>
     <div class="border-t border-hairline pt-4 flex flex-col gap-3">

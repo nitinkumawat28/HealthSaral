@@ -2,6 +2,8 @@
 import Layout from '../../frontend/layouts/Layout.astro';
 import Header from '../../frontend/components/Header.astro';
 import Footer from '../../frontend/components/Footer.astro';
+import BlogShareBar from '../../frontend/components/BlogShareBar.astro';
+import BlogBreadcrumbs from '../../frontend/components/BlogBreadcrumbs.astro';
 ---
 
 <Layout 
@@ -9,6 +11,7 @@ import Footer from '../../frontend/components/Footer.astro';
   description="Understand your Liver Function Test (LFT) report. What do high SGPT (ALT), SGOT (AST), bilirubin and alkaline phosphatase values mean? Normal LFT ranges in India and liver health diet tips."
 >
   <Header />
+  <BlogBreadcrumbs title="Liver Function Test (LFT) Results Explained: SGPT, SGOT, Bilirubin" slug="liver-function-test-report-guide" />
 
   <main class="flex-grow">
     <section class="relative overflow-hidden bg-mesh-gradient pt-14 pb-16 px-4 sm:px-6 lg:px-8 border-b border-hairline">
@@ -142,19 +145,33 @@ import Footer from '../../frontend/components/Footer.astro';
       </div>
     </article>
 
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <BlogShareBar title="Liver Function Test (LFT) Results Explained: SGPT, SGOT, Bilirubin" url="https://healthsaral.in/blog/liver-function-test-report-guide/" />
+    </div>
+
     <section class="py-12 bg-canvas-soft border-t border-hairline px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
         <h2 class="text-xl font-display font-bold text-primary mb-6">Related Patient Guides</h2>
         <div class="grid sm:grid-cols-2 gap-4">
           <a href="/blog/kidney-function-test-report-explained/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
             <span class="text-2xl block mb-2">🫘</span>
-            <h3 class="text-sm font-display font-semibold text-primary mb-1">Kidney Function Test: Creatinine, eGFR Explained</h3>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">Kidney Function Test (KFT): Creatinine & eGFR</h3>
             <span class="text-xs text-muted">8 min read</span>
           </a>
           <a href="/blog/lipid-profile-report-guide/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
             <span class="text-2xl block mb-2">❤️</span>
             <h3 class="text-sm font-display font-semibold text-primary mb-1">Lipid Profile: LDL, HDL, Cholesterol Explained</h3>
             <span class="text-xs text-muted">9 min read</span>
+          </a>
+          <a href="/blog/how-to-read-blood-test-report/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">🩸</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">How to Read a Blood Test Report: Complete Guide</h3>
+            <span class="text-xs text-muted">8 min read</span>
+          </a>
+          <a href="/blog/hba1c-blood-sugar-report-guide/" class="border border-hairline bg-canvas rounded-lg p-4 hover:border-primary/20 hover:shadow-sm transition-all">
+            <span class="text-2xl block mb-2">📊</span>
+            <h3 class="text-sm font-display font-semibold text-primary mb-1">HbA1c & Blood Sugar: Diabetes Markers Explained</h3>
+            <span class="text-xs text-muted">8 min read</span>
           </a>
         </div>
       </div>
@@ -167,15 +184,53 @@ import Footer from '../../frontend/components/Footer.astro';
 <script type="application/ld+json" is:inline>
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": [
+    "Article",
+    "MedicalWebPage"
+  ],
   "headline": "Liver Function Test (LFT) Results Explained: SGPT, SGOT, Bilirubin",
-  "description": "Understand your Liver Function Test (LFT) report. What do high SGPT (ALT), SGOT (AST), bilirubin and alkaline phosphatase values mean? Normal LFT ranges in India.",
+  "description": "What is a normal SGPT and SGOT level? Learn what your LFT markers mean, causes of elevated liver enzymes, and how to protect liver health with diet.",
   "datePublished": "2026-11-05",
-  "dateModified": "2026-11-05",
-  "author": {"@type": "Organization", "name": "HealthSaral Medical Team"},
-  "publisher": {"@type": "Organization", "name": "HealthSaral", "url": "https://healthsaral.in"},
-  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://healthsaral.in/blog/liver-function-test-report-guide/"},
-  "about": [{"@type": "MedicalCondition", "name": "Fatty Liver Disease"}, {"@type": "MedicalTest", "name": "Liver Function Test"}]
+  "dateModified": "2026-11-14",
+  "author": {
+    "@type": "Person",
+    "name": "Dr. Rajesh Verma, MBBS",
+    "jobTitle": "Pathologist",
+    "url": "https://healthsaral.in/about/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "HealthSaral",
+    "url": "https://healthsaral.in",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://healthsaral.in/favicon-96x96.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://healthsaral.in/blog/liver-function-test-report-guide/"
+  },
+  "about": [
+    {
+      "@type": "MedicalCondition",
+      "name": "Liver Disease"
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "Liver Function Test"
+    },
+    {
+      "@type": "MedicalTest",
+      "name": "SGPT Test"
+    }
+  ],
+  "medicalAudience": {
+    "@type": "PatientAudience",
+    "audienceType": "Patient"
+  },
+  "inLanguage": "en",
+  "isAccessibleForFree": true
 }
 </script>
 
